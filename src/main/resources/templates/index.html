@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- PAGE settings -->
+  <link rel="icon" href="https://templates.pingendo.com/assets/Pingendo_favicon.ico">
+  <title>Album</title>
+  <meta name="description" content="Wireframe design of an album page by Pingendo">
+  <meta name="keywords" content="Pingendo bootstrap example template wireframe album ">
+  <meta name="author" content="Pingendo">
+  <!-- CSS dependencies -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+<!--  <link rel="stylesheet" href="../static/css/wireframe.css">-->
+<!--  <link rel="stylesheet" href="../static/css/custom.css">-->
+            <link rel="stylesheet" href="/css/wireframe.css">
+            <link rel="stylesheet" href="/css/custom.css">
+</head>
+
+<body class="body" style="">
+  <nav class="navbar navbar-light">
+    <div class="container d-flex justify-content-center"> <a class="navbar-brand text-primary" href="/">
+        <i class="fa d-inline fa-lg fa-circle-o"></i>
+        <b>Курсовая работа "Библиотека"</b>
+      </a> </div>
+  </nav>
+  <div class="header py-0" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 p-0 m-0" style="">
+          <form class="form-inline d-flex justify-content-center">
+            <div class="input-group" id="author-input-div"> <input th:value="${author}" id="author-search-input" class="form-control author-search" placeholder="Автор(Примеры: 'чехов' 'чехов антон' 'чехов антон павлович')">
+              <div class="input-group-append"> <button id="author-search-button" class="btn btn-primary" type="button">Поиск по Автору</button> </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="title py-0 pt-5" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <h1 class="display-1"><a href="/">Книги</a><br></h1>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+    </div>
+  </div>
+  <div class="py-1" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3" style="transition: all 0.25s;">
+          <div class="list-group">
+            <a th:href="@{/home}" class="list-group-item list-group-item-action list-header">Жанры</a>
+            <div th:each="genge: ${genres}">
+              <a href="#" th:text="${genge.getGenre()}" th:classappend="${(selectedGenre != null &amp;&amp; selectedGenre.equals(genge.getGenre()))} ? active" th:id="${(selectedGenre != null &amp;&amp; selectedGenre.equals(genge.getGenre()))} ? 'active-genre'" class="list-group-item list-group-item-action genre-links"></a>
+            </div>
+          </div>
+          <div class="list-group">
+            <a href="/home" class="list-group-item list-group-item-action list-header">Сортировка</a>
+            <a href="#" class="list-group-item list-group-item-action sorting-link" th:classappend="${sortedBy.equals('author')} ? active" th:value="author" th:id="${sortedBy.equals('author')} ? 'active-sorted-by'"> Автор </a>
+            <a href="#" class="list-group-item list-group-item-action sorting-link" th:classappend="${sortedBy.equals('genre')} ? active" th:value="genre" th:id="${sortedBy.equals('genre')} ? 'active-sorted-by'"> Жанр </a>
+          </div>
+        </div>
+        <div class="col-md-9" style="transition: all 0.25s;">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div th:each="book: ${books}" class="col-md-4">
+                      <div class="card">
+                        <img class="card-img-top book-image" th:src="@{${'/image/' + book.getImage().getId()}}" alt="Card image cap">
+                        <div class="card-body">
+                          <h4 th:text="${book.bookName}" class="card-title"></h4>
+                          <p th:text="${book.annotation}" class="card-text book-annotation-preview"></p>
+                          <a th:href="@{/books/{id}(id=${book.getId()})}" class="btn btn-primary">Детали</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link" th:href="@{/home(page=1)}">
+                <span>«</span>
+              </a>
+            </li>
+            <div th:each="page: ${pager.getAvailablePages()}">
+              <li th:classappend="${page == pager.getCurrentPage()} ? active" class="page-item">
+                <a th:text="${page}" class="page-link" href="#"></a>
+              </li>
+            </div>
+            <li class="page-item">
+              <a class="page-link" th:href="@{/home(page = ${pager.getLastPage()})}">
+                <span>»</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="text-muted py-1">
+    <div class="container">
+      <p class="float-right">
+        <a href="#">Back to top</a>
+      </p>
+      <p></p>
+    </div>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
+  <script src="js/buttonEvents.js"></script>
+  <script src="js/indexButtonEvents.js"></script>
+</body>
+
+</html>
