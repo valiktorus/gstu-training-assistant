@@ -1,4 +1,4 @@
-package by.gstu.workout.model;
+package by.gstu.workout.utils;
 
 import lombok.Data;
 import org.springframework.data.domain.Page;

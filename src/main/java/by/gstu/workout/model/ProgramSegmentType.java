@@ -1,5 +1,6 @@
 package by.gstu.workout.model;
 
+import by.gstu.workout.enums.ProgramSegmentTypeEnum;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
@@ -9,19 +10,17 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "images", catalog = "fitness")
+@Table(name = "program_segment_type",catalog = "fitness")
 @Data
-@DynamicUpdate
-@DynamicInsert
 @SelectBeforeUpdate
+@DynamicInsert
+@DynamicUpdate
 @NoArgsConstructor
-public class Image {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProgramSegmentType {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private byte[] image;
+    @Enumerated(EnumType.STRING)
+    private ProgramSegmentTypeEnum name;
 
-    public Image(Long id) {
-        this.id = id;
-    }
 }

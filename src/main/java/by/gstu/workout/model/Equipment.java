@@ -1,6 +1,7 @@
 package by.gstu.workout.model;
 
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
@@ -8,16 +9,18 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "genres", catalog = "library")
+@Table(name = "equipment", catalog = "fitness")
 @Data
 @DynamicUpdate
 @DynamicInsert
 @SelectBeforeUpdate
 @NoArgsConstructor
-@AllArgsConstructor
-public class Genre {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class Equipment {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String genre;
+    private String name;
+    @JoinColumn(name = "image_id")
+    @OneToOne
+    private Image image;
 }
