@@ -37,6 +37,6 @@ public class MainController {
     public String booksPaging(Model model) {
         Optional<Image> byId = imageRepository.findById(1L);
         System.out.println(byId);
-        return "index";
+        return "exercises";
     }
 }
