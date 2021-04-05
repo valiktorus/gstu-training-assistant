@@ -1,8 +1,6 @@
 package by.gstu.workout.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
@@ -14,6 +12,8 @@ import javax.persistence.*;
 @DynamicUpdate
 @DynamicInsert
 @SelectBeforeUpdate
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExercisePart {

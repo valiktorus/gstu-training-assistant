@@ -1,7 +1,9 @@
 package by.gstu.workout.model;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
@@ -13,6 +15,8 @@ import javax.persistence.*;
 @Data
 @DynamicUpdate
 @DynamicInsert
+@Getter
+@Setter
 @SelectBeforeUpdate
 @NoArgsConstructor
 public class Image {

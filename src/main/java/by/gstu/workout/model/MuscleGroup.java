@@ -1,8 +1,6 @@
 package by.gstu.workout.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
@@ -14,6 +12,8 @@ import javax.persistence.Table;
 @DynamicUpdate
 @DynamicInsert
 @SelectBeforeUpdate
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class MuscleGroup {

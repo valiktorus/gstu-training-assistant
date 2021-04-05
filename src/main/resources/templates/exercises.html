@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
-
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="custom.css">
+<!--  <link rel="stylesheet" href="../static/css/aquamarine.css">-->
+  <link rel="stylesheet" href="/css/aquamarine.css">
 </head>
 
 <body class="m-0 p-0" style="">
@@ -94,11 +94,14 @@
           <div class="row">
             <div class="col-md-12">
               <div class="row">
-                <div class="col-md-4">
-                  <div class="bg-primary card"> <img class="img-fluid rounded-circle w-75 mx-auto mt-3" src="assets/styleguide/people_5.jpg" alt="Card image">
-                    <div class="card-body">
-                      <h4 class="card-title text-center" style="">Отжимания<br></h4>
-                      <h4 class="card-title text-center" style="">Группа мышц: Грудные<br></h4>
+                <div th:each="exercise: ${exersises}" class="col-md-4">
+                  <div class="bg-primary card">
+                    <div class="exercise-image-wrapper">
+                        <img th:src="@{/image/{imageId}(imageId=${exercise.getImageId()})}" class="img-fluid rounded-circle w-75 mx-auto mt-3" alt="Card image">
+                    </div>
+                      <div class="card-body">
+                      <h4 th:text="${exercise.getName()}" class="card-title text-center" style=""><br></h4>
+                      <h4 th:text="'Группа мышц: ' + ${exercise.getMuscleGroup().getName()}" class="card-title text-center" style="">Группа мышц: Грудные<br></h4>
                     </div>
                   </div>
                 </div>

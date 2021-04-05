@@ -5,7 +5,9 @@ import by.gstu.workout.model.Exercise;
 import by.gstu.workout.model.Image;
 import by.gstu.workout.model.Program;
 import by.gstu.workout.repository.*;
+import by.gstu.workout.service.ExerciseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,28 +17,12 @@ import java.util.Optional;
 @Controller
 public class MainController {
     @Autowired
-    private ImageRepository imageRepository;
-    @Autowired
-    private MuscleGroupRepository muscleGroupRepository;
-    @Autowired
-    private DifficultyRepository difficultyRepository;
-    @Autowired
-    private ProgramSegmentTypeRepository programSegmentTypeRepository;
-    @Autowired
-    private EquipmentRepository equipmentRepository;
-    @Autowired
-    private ExerciseRepository exerciseRepository;
-    @Autowired
-    private ExercisePartRepository exercisePartRepository;
-    @Autowired
-    private ProgramRepository programRepository;
-    @Autowired
-    private ProgramSegmentRepository programSegmentRepository;
+    private ExerciseService exerciseService;
 
     @GetMapping(value = {"/", "/home"})
     public String booksPaging(Model model) {
-        Optional<Image> byId = imageRepository.findById(1L);
-        System.out.println(byId);
+        Page<Exercise> page = exerciseService.getAll(0, 50);
+        model.addAttribute("exersises", page.getContent());
         return "exercises";
     }
 }

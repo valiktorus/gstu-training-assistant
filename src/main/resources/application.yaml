@@ -3,7 +3,10 @@ spring:
     username: root
     password: example
     url: jdbc:mysql://localhost:33061
-#  jpa:
+  jpa:
+    show-sql: true
+server:
+  port: 8081
 #    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect]]]]]
 #    properties:
 #      hibernate:
@@ -11,18 +14,4 @@ spring:
 #        dialect: org.hibernate.dialect.MySQL5Dialect
 #        format_sql: true
 #    show-sql: true
-server:
-  port: 8081
-#logging:
-#  pattern:
-#    file: "%d{HH:mm:ss} %-5p [%c] - %m%n"
-#  level:
-#    ROOT: error
-#    org.springframework: warn
-#    javax.faces: warn
-#    org.omnifaces: warn
-#    org.springframework.security: warn
-#    org.hibernate: info
-#    org.hibernate.type.descriptor.sql: info
-#  file:
-#    name: c:\app.log
+

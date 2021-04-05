@@ -2,7 +2,9 @@ package by.gstu.workout.model;
 
 import by.gstu.workout.enums.ProgramSegmentTypeEnum;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
@@ -13,6 +15,8 @@ import javax.persistence.*;
 @Table(name = "program_segment_type",catalog = "fitness")
 @Data
 @SelectBeforeUpdate
+@Getter
+@Setter
 @DynamicInsert
 @DynamicUpdate
 @NoArgsConstructor

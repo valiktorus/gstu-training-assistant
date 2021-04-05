@@ -1,8 +1,6 @@
 package by.gstu.workout.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
@@ -15,16 +13,20 @@ import java.util.List;
 @DynamicUpdate
 @DynamicInsert
 @SelectBeforeUpdate
+@Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Exercise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String name;
     private String description;
-    @JoinColumn(name = "image_id")
-    @OneToOne
-    private Image image;
+    @JoinColumn(name = "muscle_group_id")
+    @ManyToOne
+    private MuscleGroup muscleGroup;
+    @Column(name = "image_id")
+    private Long imageId;
     @JoinColumn(name = "equipment_id")
     @ManyToOne
     private Equipment equipment;
