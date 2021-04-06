@@ -1,0 +1,16 @@
+.card-image-wrapper {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.exercise-card-image{
+    margin: auto;
+    height: 100%;
+    border-radius: calc(0.25rem - 0px);
+    max-width: 100%;
+}
+.exercise-card-body {
+    min-height: 150px;
+}
