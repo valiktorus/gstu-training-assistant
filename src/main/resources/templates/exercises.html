@@ -62,10 +62,10 @@
           <div class="col-md-12">
             <h2 class="text-center">Группа мышц<br></h2>
             <div class="btn-group">
-              <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Не выбрано&nbsp;</button>
-              <div class="dropdown-menu"><a class="dropdown-item" href="#">Action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
+              <button th:text="${defaultFiltrationValue}" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
+              <div class="dropdown-menu">
+                <a th:text="${defaultFiltrationValue}" class="dropdown-item" href="#"></a>
+                <a th:each="muscleGroup : ${muscleGroups}" th:text="${muscleGroup.getName()}" class="dropdown-item" href="#"></a>
               </div>
             </div>
           </div>
@@ -74,10 +74,10 @@
           <div class="col-md-12">
             <h2 class="text-center">Сняряжение<br></h2>
             <div class="btn-group">
-              <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Не выбрано</button>
-              <div class="dropdown-menu"><a class="dropdown-item" href="#">Action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
+              <button th:text="${defaultFiltrationValue}" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
+              <div class="dropdown-menu">
+                <a th:text="${defaultFiltrationValue}" class="dropdown-item" href="#"></a>
+                <a th:each="equipment: ${equipments}" th:text="${equipment.getName()}" class="dropdown-item" href="#"></a>
               </div>
             </div>
           </div>
@@ -88,10 +88,10 @@
           <div class="col-md-12">
             <p class="lead" style="">Cортировка:<br></p>
             <div class="btn-group">
-              <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> По умолчанию</button>
-              <div class="dropdown-menu"><a class="dropdown-item" href="#">Action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Separated link</a>
+              <button th:text="${defaultSortingValue}" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
+              <div class="dropdown-menu">
+                <a th:text="${defaultSortingValue}" class="dropdown-item" href="#"></a>
+                <a th:each="sortingField: ${sortingFields}" th:text="${sortingField}" class="dropdown-item" href="#"></a>
               </div>
             </div>
           </div>
@@ -99,7 +99,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="row">
-              <div th:each="exercise: ${exersises}" class="col-md-4">
+              <div th:each="exercise: ${exercises}" class="col-md-4">
                 <div class="bg-primary card">
                   <div class="card-image-wrapper">
                     <img th:src="@{/image/{imageId}(imageId=${exercise.getImageId()})}"
@@ -153,6 +153,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+<script src="/js/buttonEvents.js"></script>
 <pingendo onclick="window.open('https://pingendo.com/', '_blank')"
           style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">
   Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block"

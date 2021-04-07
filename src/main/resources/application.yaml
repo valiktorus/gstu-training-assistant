@@ -7,11 +7,7 @@ spring:
     show-sql: true
 server:
   port: 8081
-#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect]]]]]
-#    properties:
-#      hibernate:
-#        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
-#        dialect: org.hibernate.dialect.MySQL5Dialect
-#        format_sql: true
-#    show-sql: true
+service:
+  default-sorting-value: По умолчанию
+  default-filtration-value: Не выбрано
 

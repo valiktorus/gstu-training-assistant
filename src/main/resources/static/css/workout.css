@@ -1,8 +1,8 @@
 .card-image-wrapper {
-    height: 160px;
+    height: 180px;
     display: flex;
     align-items: center;
-    padding: 5px 0;
+    padding: 20px 0;
 }
 
 .exercise-card-image{
