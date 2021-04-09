@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         type="text/css">
-  <!--  <link rel="stylesheet" href="../static/css/aquamarine.css">-->
-  <!--  <link rel="stylesheet" href="../static/css/workout.css">-->
-  <link rel="stylesheet" href="/css/aquamarine.css">
-  <link rel="stylesheet" href="/css/workout.css">
+    <link rel="stylesheet" href="../static/css/aquamarine.css">
+    <link rel="stylesheet" href="../static/css/workout.css">
+<!--  <link rel="stylesheet" href="/css/aquamarine.css">-->
+<!--  <link rel="stylesheet" href="/css/workout.css">-->
 </head>
 
 <body class="m-0 p-0" style="">
@@ -17,7 +17,7 @@
     <button class="navbar-toggler navbar-toggler-right border-0 p-0" type="button" data-toggle="collapse"
             data-target="#navbar14">
       <p class="navbar-brand mb-0 text-white">
-        <i class="fa d-inline fa-lg fa-stop-circle"></i> BRAND </p>
+        <i class="fa d-inline fa-lg fa-stop-circle"></i>Подбор Тренировок</p>
     </button>
     <div class="collapse navbar-collapse" id="navbar14">
       <ul class="navbar-nav mr-auto">
@@ -44,7 +44,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <a href="/">
+        <a href="/programs">
           <h1 class="display-4 text-center">Программы тренировок<br></h1>
         </a>
       </div>
@@ -111,7 +111,7 @@
               <div class="col-md-3">
                 <ul class="pagination">
                   <li class="page-item">
-                    <a class="page-link" th:href="@{/programs(page=1)}">
+                    <a class="page-link" th:href="@{/programs(page=1,sortedBy=${selectedSortingField}, difficulty=${selectedDifficulty})}">
                       <span>«</span>
                     </a>
                   </li>
@@ -121,7 +121,8 @@
                     </li>
                   </div>
                   <li class="page-item">
-                    <a class="page-link" th:href="@{/programs(page = ${pager.getLastPage()})}">
+                    <a class="page-link" th:href="@{/programs(page = ${pager.getLastPage()},
+                     sortedBy=${selectedSortingField}, difficulty=${selectedDifficulty})}">
                       <span>»</span>
                     </a>
                   </li>

@@ -19,7 +19,7 @@ public class ProgramService {
     }
     public Page<Program> getAllByDifficulty(String difficulty,  int pageNumber,
                                                          int pageSize, String sortedField, Sort.Direction direction) {
-        return programRepository.findAllByDifficultyDifficultyNameContaining(DifficultyName.valueOf(difficulty),
+        return programRepository.findAllByDifficultyDifficultyName(DifficultyName.valueOf(difficulty),
                 PageRequest.of(pageNumber, pageSize, direction, sortedField));
     }
 }

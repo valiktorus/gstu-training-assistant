@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         type="text/css">
-  <!--  <link rel="stylesheet" href="../static/css/aquamarine.css">-->
-  <!--  <link rel="stylesheet" href="../static/css/workout.css">-->
-  <link rel="stylesheet" href="/css/aquamarine.css">
-  <link rel="stylesheet" href="/css/workout.css">
+    <link rel="stylesheet" href="../static/css/aquamarine.css">
+    <link rel="stylesheet" href="../static/css/workout.css">
+<!--  <link rel="stylesheet" href="/css/aquamarine.css">-->
+<!--  <link rel="stylesheet" href="/css/workout.css">-->
 </head>
 
 <body class="m-0 p-0" style="">
@@ -17,7 +17,7 @@
     <button class="navbar-toggler navbar-toggler-right border-0 p-0" type="button" data-toggle="collapse"
             data-target="#navbar14">
       <p class="navbar-brand mb-0 text-white">
-        <i class="fa d-inline fa-lg fa-stop-circle"></i> BRAND </p>
+        <i class="fa d-inline fa-lg fa-stop-circle"></i>Подбор Тренировок</p>
     </button>
     <div class="collapse navbar-collapse" id="navbar14">
       <ul class="navbar-nav mr-auto">
@@ -108,7 +108,7 @@
                          class="exercise-card-image" alt="Card image">
                   </div>
                   <div class="card-body exercise-card-body">
-                    <a class="exercise-header-link" href="#"><h4 th:text="${exercise.getName()}" class="card-title text-center" style=""><br></h4></a>
+                    <a class="exercise-header-link" th:href="@{/exercise/{id}(id=${exercise.getId()})}"><h4 th:text="${exercise.getName()}" class="card-title text-center" style=""><br></h4></a>
                     <h5 th:text="'Группа мышц: ' + ${exercise.getMuscleGroup().getName()}"
                         class="card-title text-center" style="">Группа мышц: Грудные<br></h5>
                   </div>

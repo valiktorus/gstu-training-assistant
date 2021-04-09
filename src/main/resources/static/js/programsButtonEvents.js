@@ -1,5 +1,7 @@
 (function initializeProgramEvents() {
     programsDifficultySearchEvent();
+    programsSortingEvents();
+    programPaginationEvents();
 })();
 
 function programsDifficultySearchEvent() {
@@ -7,60 +9,38 @@ function programsDifficultySearchEvent() {
         Array.from(difficultyFiltration).forEach((element => element.onclick = function (event) {
         const searchUrl = new URL("/programs", document.location);
         searchUrl.searchParams.append("difficulty", event.target.innerText);
-        // addEquipmentToUrl(searchUrl);
-        // addSortedByToUrl(searchUrl);
+        addProgramSortedByToUrl(searchUrl);
         window.location.href = decodeURI(searchUrl.toString());
     }));
 }
-
-function equipmentSearchEvent() {
-    const equipmentFiltration = document.getElementsByClassName("equipment-filtration-link");
-    Array.from(equipmentFiltration).forEach((element => element.onclick = function (event) {
-        const searchUrl = new URL("/exercises", document.location);
-        searchUrl.searchParams.append("equipment", event.target.innerText);
-        addMuscleGroupToUrl(searchUrl);
-        addSortedByToUrl(searchUrl);
-        window.location.href = decodeURI(searchUrl.toString());
-    }));
-}
-
-function sortingEvents() {
+function programsSortingEvents() {
     const sortedLinks = document.getElementsByClassName("sorting-link");
     Array.from(sortedLinks).forEach((element => element.onclick = function (event) {
-        const searchUrl = new URL("/exercises", document.location);
+        const searchUrl = new URL("/programs", document.location);
         searchUrl.searchParams.append("sortedBy", event.target.innerText);
-        addEquipmentToUrl(searchUrl);
-        addMuscleGroupToUrl(searchUrl);
+        addProgramDifficultyToUrl(searchUrl);
         window.location.href = decodeURI(searchUrl.toString());
     }));
 }
-
-function paginationEvents() {
+function programPaginationEvents() {
     const pageLinks = document.getElementsByClassName("page-link");
     Array.from(pageLinks).forEach((element => element.onclick = function (event) {
         const pageLink = event.target;
         const pageNumber = pageLink.innerHTML;
-        const paginationUrl = new URL("/exercises", document.location);
+        const paginationUrl = new URL("/programs", document.location);
         paginationUrl.searchParams.append("page", pageNumber);
-        addSortedByToUrl(paginationUrl);
-        addMuscleGroupToUrl(paginationUrl);
-        addEquipmentToUrl(paginationUrl);
+        addProgramDifficultyToUrl(paginationUrl);
+        addProgramSortedByToUrl(paginationUrl);
         window.location.href = decodeURI(paginationUrl.toString());
     }));
 }
 
-function addEquipmentToUrl(url) {
-    const activeEquipment = document.getElementById("selected-equipment");
-    url.searchParams.append("equipment", activeEquipment.innerText);
+function addProgramDifficultyToUrl(url) {
+    const activeEquipment = document.getElementById("selected-difficulty");
+    url.searchParams.append("difficulty", activeEquipment.innerText);
 }
 
-function addSortedByToUrl(url) {
+function addProgramSortedByToUrl(url) {
     const sortedBy = document.getElementById("selected-sorting-field");
     url.searchParams.append("sortedBy", sortedBy.innerText);
-}
-
-function addMuscleGroupToUrl(url) {
-    const muscleGroup = document.getElementById("selected-muscle-group");
-    url.searchParams.append("muscleGroup", muscleGroup.innerText);
-
 }

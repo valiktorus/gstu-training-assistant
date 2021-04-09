@@ -9,6 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProgramRepository extends JpaRepository<Program, Long> {
     Page<Program> findAllBy(Pageable pageable);
-    Page<Program> findAllByDifficultyDifficultyNameContaining(DifficultyName difficulty, Pageable pageable);
-
+    Page<Program> findAllByDifficultyDifficultyName(DifficultyName difficulty, Pageable pageable);
 }

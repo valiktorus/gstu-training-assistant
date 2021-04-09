@@ -13,7 +13,8 @@ public class Pager<T> {
     private long currentPage;
 
     public Pager(Page<T> page) {
-        this.lastPage = page.getTotalPages();
+        int totalPages = page.getTotalPages();
+        this.lastPage = totalPages == 0 ? 1 : totalPages;
         this.currentPage = page.getNumber() + 1;
         availablePages = new ArrayList<>();
         if (currentPage - 2 > 0){
