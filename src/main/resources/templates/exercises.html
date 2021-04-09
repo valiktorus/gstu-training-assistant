@@ -21,9 +21,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbar14">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item"><a class="nav-link" href="#">На главную</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Упражнения</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Программы</a></li>
+        <li class="nav-item"><a class="nav-link" href="/">На главную</a></li>
+        <li class="nav-item"><a class="nav-link" href="/">Упражнения</a></li>
+        <li class="nav-item"><a class="nav-link" href="/programs">Программы</a></li>
       </ul>
       <p class="d-none d-md-block lead mb-0  text-white">Подбор Тренировок</p>
       <ul class="navbar-nav ml-auto">
@@ -44,7 +44,9 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h1 class="display-4 text-center">Упражнения<br></h1>
+        <a href="/">
+          <h1 class="display-4 text-center">Упражнения<br></h1>
+        </a>
       </div>
     </div>
   </div>
@@ -62,10 +64,10 @@
           <div class="col-md-12">
             <h2 class="text-center">Группа мышц<br></h2>
             <div class="btn-group">
-              <button th:text="${defaultFiltrationValue}" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
+              <button id="selected-muscle-group" th:text="${selectedMuscleGroup}" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
               <div class="dropdown-menu">
-                <a th:text="${defaultFiltrationValue}" class="dropdown-item" href="#"></a>
-                <a th:each="muscleGroup : ${muscleGroups}" th:text="${muscleGroup.getName()}" class="dropdown-item" href="#"></a>
+                <a th:text="${defaultFiltrationValue}" class="dropdown-item muscle-group-filtration-link" href="#"></a>
+                <a th:each="muscleGroup : ${muscleGroups}" th:text="${muscleGroup.getName()}" class="dropdown-item muscle-group-filtration-link" href="#"></a>
               </div>
             </div>
           </div>
@@ -74,10 +76,10 @@
           <div class="col-md-12">
             <h2 class="text-center">Сняряжение<br></h2>
             <div class="btn-group">
-              <button th:text="${defaultFiltrationValue}" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
+              <button id="selected-equipment" th:text="${selectedEquipment}" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
               <div class="dropdown-menu">
-                <a th:text="${defaultFiltrationValue}" class="dropdown-item" href="#"></a>
-                <a th:each="equipment: ${equipments}" th:text="${equipment.getName()}" class="dropdown-item" href="#"></a>
+                <a th:text="${defaultFiltrationValue}" class="dropdown-item equipment-filtration-link" href="#"></a>
+                <a th:each="equipment: ${equipments}" th:text="${equipment.getName()}" class="dropdown-item equipment-filtration-link" href="#"></a>
               </div>
             </div>
           </div>
@@ -88,10 +90,10 @@
           <div class="col-md-12">
             <p class="lead" style="">Cортировка:<br></p>
             <div class="btn-group">
-              <button th:text="${defaultSortingValue}" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
+              <button id="selected-sorting-field" th:text="${selectedSortingField}" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
               <div class="dropdown-menu">
-                <a th:text="${defaultSortingValue}" class="dropdown-item" href="#"></a>
-                <a th:each="sortingField: ${sortingFields}" th:text="${sortingField}" class="dropdown-item" href="#"></a>
+<!--                <a th:text="${defaultSortingValue}" class="dropdown-item sorting-link" href="#"></a>-->
+                <a th:each="sortingField: ${sortingFields}" th:text="${sortingField}" class="dropdown-item sorting-link" href="#"></a>
               </div>
             </div>
           </div>
@@ -106,9 +108,9 @@
                          class="exercise-card-image" alt="Card image">
                   </div>
                   <div class="card-body exercise-card-body">
-                    <h4 th:text="${exercise.getName()}" class="card-title text-center" style=""><br></h4>
-                    <h4 th:text="'Группа мышц: ' + ${exercise.getMuscleGroup().getName()}"
-                        class="card-title text-center" style="">Группа мышц: Грудные<br></h4>
+                    <a class="exercise-header-link" href="#"><h4 th:text="${exercise.getName()}" class="card-title text-center" style=""><br></h4></a>
+                    <h5 th:text="'Группа мышц: ' + ${exercise.getMuscleGroup().getName()}"
+                        class="card-title text-center" style="">Группа мышц: Грудные<br></h5>
                   </div>
                 </div>
               </div>
@@ -120,12 +122,21 @@
             <div class="row d-flex flex-row justify-content-end">
               <div class="col-md-3">
                 <ul class="pagination">
-                  <li class="page-item"><a class="page-link" href="#"> <span>«</span></a></li>
-                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">4</a></li>
-                  <li class="page-item"><a class="page-link" href="#"> <span>»</span></a></li>
+                  <li class="page-item">
+                    <a class="page-link" th:href="@{/exercises(page=1)}">
+                      <span>«</span>
+                    </a>
+                  </li>
+                  <div th:each="page: ${pager.getAvailablePages()}">
+                    <li th:classappend="${page == pager.getCurrentPage()} ? active" class="page-item">
+                      <a th:text="${page}" class="page-link" href="#"></a>
+                    </li>
+                  </div>
+                  <li class="page-item">
+                    <a class="page-link" th:href="@{/exercises(page = ${pager.getLastPage()})}">
+                      <span>»</span>
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>

@@ -14,3 +14,6 @@
 .exercise-card-body {
     min-height: 150px;
 }
+.exercise-header-link{
+    color: black;
+}

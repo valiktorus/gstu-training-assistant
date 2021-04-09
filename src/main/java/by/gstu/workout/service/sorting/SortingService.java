@@ -15,4 +15,15 @@ public class SortingService {
     public List<String> getExerciseSortingFields() {
         return List.of("id", "name", "equipment_id");
     }
+    public List<String> getProgramSortingFields() {
+        return List.of( "name", "difficulty_id");
+    }
+
+    public String getCurrentSortingField(String sortingField) {
+        return sortingField.equals(defaultSortingField) ? "id" : sortingField;
+    }
+
+//    public String getSelectedSortingField(String sortingField) {
+//        return equipment.isEmpty() ? defaultFiltrationValue : equipment;
+//    }
 }

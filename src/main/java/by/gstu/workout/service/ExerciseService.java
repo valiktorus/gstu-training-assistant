@@ -55,4 +55,10 @@ public class ExerciseService implements GenericService<Exercise> {
     public Page<Exercise> getAll(int pageNumber, int pageSize){
         return exerciseRepository.findAll(PageRequest.of(pageNumber, pageSize));
     }
+
+    public Page<Exercise> getAllByMuscleGroupAndEquipment(String muscleGroup, String equipment, int pageNumber,
+                                             int pageSize, String sortedField, Sort.Direction direction) {
+        return exerciseRepository.findAllByMuscleGroupNameContainingAndEquipmentNameContaining(muscleGroup, equipment,
+                PageRequest.of(pageNumber, pageSize, direction, sortedField));
+    }
 }
