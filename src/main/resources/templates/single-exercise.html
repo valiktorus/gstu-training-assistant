@@ -1,152 +1,166 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-<!--  <link rel="stylesheet" href="../static/css/aquamarine.css">-->
-<!--  <link rel="stylesheet" href="../static/css/workout.css">-->
-    <link rel="stylesheet" href="/css/aquamarine.css">
-    <link rel="stylesheet" href="/css/workout.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        type="text/css">
+  <!--  <link rel="stylesheet" href="../static/css/aquamarine.css">-->
+  <!--  <link rel="stylesheet" href="../static/css/workout.css">-->
+  <link rel="stylesheet" href="/css/aquamarine.css">
+  <link rel="stylesheet" href="/css/workout.css">
 </head>
 
 <body class="m-0 p-0" style="">
-  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-    <div class="container">
-      <button class="navbar-toggler navbar-toggler-right border-0 p-0" type="button" data-toggle="collapse" data-target="#navbar14">
-        <p class="navbar-brand mb-0 text-white">
-          <i class="fa d-inline fa-lg fa-stop-circle"></i>Подбор Тренировок</p>
-      </button>
-      <div class="collapse navbar-collapse" id="navbar14">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item"><a class="nav-link" href="/">На главную</a></li>
-          <li class="nav-item"><a class="nav-link" href="/">Упражнения</a></li>
-          <li class="nav-item"><a class="nav-link" href="/programs">Программы</a></li>
-        </ul>
-        <p class="d-none d-md-block lead mb-0  text-white">Подбор Тренировок</p>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item mx-1"><a class="nav-link" href="#">
-              <i class="fa fa-github fa-fw fa-lg"></i>
-            </a></li>
-          <li class="nav-item mx-1"><a class="nav-link" href="#">
-              <i class="fa fa-gitlab fa-fw fa-lg"></i>
-            </a></li>
-          <li class="nav-item mx-1"><a class="nav-link" href="#">
-              <i class="fa fa-bitbucket fa-fw fa-lg"></i>
-            </a></li>
-        </ul>
-      </div>
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <div class="container">
+    <button class="navbar-toggler navbar-toggler-right border-0 p-0" type="button" data-toggle="collapse"
+            data-target="#navbar14">
+      <a href="#">
+        <p class="navbar-brand mb-0 text-white"><i class="fa d-inline fa-lg fa-stop-circle"></i>Подбор Тренировок</p>
+      </a>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar14">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"><a class="nav-link" href="/">На главную</a></li>
+        <li class="nav-item"><a class="nav-link" href="/exercises">Упражнения</a></li>
+        <li class="nav-item"><a class="nav-link" href="/programs">Программы</a></li>
+      </ul>
+      <a href="/"><p class="d-none d-md-block lead mb-0  text-white">Подбор Тренировок</p></a>
+      <ul class="navbar-nav ml-auto">
+<!--        <li class="nav-item mx-1"><a class="nav-link" href="#">-->
+<!--          <i class="fa fa-github fa-fw fa-lg"></i>-->
+<!--        </a></li>-->
+<!--        <li class="nav-item mx-1"><a class="nav-link" href="#">-->
+<!--          <i class="fa fa-gitlab fa-fw fa-lg"></i>-->
+<!--        </a></li>-->
+<!--        <li class="nav-item mx-1"><a class="nav-link" href="#">-->
+<!--          <i class="fa fa-bitbucket fa-fw fa-lg"></i>-->
+<!--        </a></li>-->
+      </ul>
     </div>
-  </nav>
-  <div class="py-1 border">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <a href="/programs">
-            <h1 class="display-4 text-center">Программы тренировок<br></h1>
-          </a>
-        </div>
+  </div>
+</nav>
+<div class="py-1 border">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <a th:href="@{/exercise/{id}(id=${exercise.getImageId()})}">
+          <h1 th:text="${exercise.getName()}" class="display-4 text-center"><br></h1>
+        </a>
       </div>
     </div>
   </div>
-  <div class="py-5">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4"><img class="img-fluid d-block" src="https://static.pingendo.com/img-placeholder-1.svg"></div>
-            <div class="col-md-4"></div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <h2 class="m-0" contenteditable="true">Группа мышц</h2>
-                    </div>
-                    <div class="col-md-9">
-                      <p class="lead m-0">Lead paragraph. A wonderful serenity has taken possession of my entire soul.</p>
-                    </div>
+</div>
+<div class="py-5">
+  <div class="container-fluid">
+    <div class="row border">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4 border">
+            <img class="img-fluid d-block mx-auto" th:src="@{/image/{imageId}(imageId=${exercise.getImageId()})}"></div>
+          <div class="col-md-4"></div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-md-8">
+                <div class="row">
+                  <div class="col-md-3">
+                    <h2 class="m-0" contenteditable="true">Группа мышц</h2>
                   </div>
-                  <div class="row">
-                    <div class="col-md-3">
-                      <h2 class="m-0">Инвентарь<br></h2>
-                    </div>
-                    <div class="col-md-9">
-                      <p class="lead m-0">Lead paragraph. A wonderful serenity has taken possession of my entire soul.</p>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-3">
-                      <h2 class="m-0">Описание<br></h2>
-                    </div>
-                    <div class="col-md-9">
-                      <p class="lead m-0">Lead paragraph. A wonderful serenity has taken possession of my entire soul.</p>
-                    </div>
+                  <div class="col-md-9">
+                    <p th:text="${exercise.getMuscleGroup().getName()}" class="lead m-0"></p>
                   </div>
                 </div>
-                <div class="col-md-2"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row my-2">
-        <div class="col-md-12">
-          <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-              <h1 class="text-center">Детали выполнения</h1>
-            </div>
-            <div class="col-md-4"></div>
-          </div>
-        </div>
-      </div>
-      <div class="row my-2">
-        <div class="col-md-12">
-          <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-              <div class="row">
-                <div class="col-md-12"><img class="img-fluid d-block mx-auto" src="https://static.pingendo.com/img-placeholder-1.svg"></div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <h2 class="m-0">Описание</h2>
-                    </div>
-                    <div class="col-md-9 m-0">
-                      <p class="lead">Lead paragraph. A wonderful serenity has taken possession of my entire soul.</p>
-                    </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <h2 class="m-0">Инвентарь<br></h2>
+                  </div>
+                  <div class="col-md-9">
+                    <p th:text="${exercise.getEquipment().getName()}" class="lead m-0"></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-3">
+                    <h2 class="m-0">Описание<br></h2>
+                  </div>
+                  <div class="col-md-9">
+                    <p th:text="${exercise.getDescription()}" class="lead m-0"></p>
                   </div>
                 </div>
               </div>
+              <div class="col-md-2"></div>
             </div>
-            <div class="col-md-2"></div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="py-3 border">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <p class="mb-0">Выполнил Пшеничник В.Н ЗИС-20</p>
+    <div class="row my-2 border">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <h1 class="text-center">Детали выполнения</h1>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+      </div>
+    </div>
+    <div th:each="exercisePart : ${exercise.getExerciseParts()}" class="row my-2 border">
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-12">
+                <img th:src="@{/image/{id}(id=${exercisePart.getImage().getId()})}" class="img-fluid d-block mx-auto">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-3">
+                    <h2 class="m-0">Описание</h2>
+                  </div>
+                  <div class="col-md-9 m-0">
+                    <p th:text="${exercisePart.getDescription()}" class="lead"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
         </div>
       </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="/js/programsButtonEvents.js"></script>
-  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
+</div>
+<div class="py-3 border">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <p class="mb-0">Выполнил Пшеничник В.Н ЗИС-20</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<pingendo onclick="window.open('https://pingendo.com/', '_blank')"
+          style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">
+  Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block"
+                                          alt="Pingendo logo" height="16"></pingendo>
 </body>
 
 </html>

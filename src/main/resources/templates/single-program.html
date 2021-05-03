@@ -5,132 +5,167 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-<!--  <link rel="stylesheet" href="../static/css/aquamarine.css">-->
-<!--  <link rel="stylesheet" href="../static/css/workout.css">-->
-      <link rel="stylesheet" href="/css/aquamarine.css">
-      <link rel="stylesheet" href="/css/workout.css">
+  <link rel="stylesheet" href="../static/css/aquamarine.css">
+  <link rel="stylesheet" href="../static/css/workout.css">
+<!--          <link rel="stylesheet" href="/css/aquamarine.css">-->
+<!--          <link rel="stylesheet" href="/css/workout.css">-->
 </head>
 
 <body class="m-0 p-0" style="">
   <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
     <div class="container">
       <button class="navbar-toggler navbar-toggler-right border-0 p-0" type="button" data-toggle="collapse" data-target="#navbar14">
-        <p class="navbar-brand mb-0 text-white">
-          <i class="fa d-inline fa-lg fa-stop-circle"></i>Подбор Тренировок</p>
+        <a href="#">
+          <p class="navbar-brand mb-0 text-white"><i class="fa d-inline fa-lg fa-stop-circle"></i>Подбор Тренировок</p>
+        </a>
       </button>
       <div class="collapse navbar-collapse" id="navbar14">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item"><a class="nav-link" href="/">На главную</a></li>
-          <li class="nav-item"><a class="nav-link" href="/">Упражнения</a></li>
+          <li class="nav-item"><a class="nav-link" href="/exercises">Упражнения</a></li>
           <li class="nav-item"><a class="nav-link" href="/programs">Программы</a></li>
         </ul>
-        <p class="d-none d-md-block lead mb-0  text-white">Подбор Тренировок</p>
+        <a href="/"><p class="d-none d-md-block lead mb-0  text-white">Подбор Тренировок</p></a>
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item mx-1"><a class="nav-link" href="#">
-              <i class="fa fa-github fa-fw fa-lg"></i>
-            </a></li>
-          <li class="nav-item mx-1"><a class="nav-link" href="#">
-              <i class="fa fa-gitlab fa-fw fa-lg"></i>
-            </a></li>
-          <li class="nav-item mx-1"><a class="nav-link" href="#">
-              <i class="fa fa-bitbucket fa-fw fa-lg"></i>
-            </a></li>
+<!--          <li class="nav-item mx-1"><a class="nav-link" href="#">-->
+<!--              <i class="fa fa-github fa-fw fa-lg"></i>-->
+<!--            </a></li>-->
+<!--          <li class="nav-item mx-1"><a class="nav-link" href="#">-->
+<!--              <i class="fa fa-gitlab fa-fw fa-lg"></i>-->
+<!--            </a></li>-->
+<!--          <li class="nav-item mx-1"><a class="nav-link" href="#">-->
+<!--              <i class="fa fa-bitbucket fa-fw fa-lg"></i>-->
+<!--            </a></li>-->
         </ul>
       </div>
     </div>
   </nav>
   <div class="py-1 border">
-    <div class="container">
+    <div class="container border">
       <div class="row">
         <div class="col-md-12">
-          <a th:href="@{/exercise/{id}(id=${exercise.getImageId()})}">
-            <h1 th:text="${exercise.getName()}" class="display-4 text-center"><br></h1>
+          <a th:href="@{/program/{id}(id=${program.getId()})}">
+            <h1 th:text="${program.getName()}" class="display-4 text-center"><br></h1>
           </a>
         </div>
       </div>
     </div>
   </div>
   <div class="py-5">
-    <div class="container-fluid">
-      <div class="row border">
+    <div class="container-fluid border">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <img th:src="@{/image/{id}(id=${program.getImage().getId()})}" class="img-fluid d-block mx-auto border">
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <div class="row border">
+            <div class="col-md-3 flex-column justify-content-end border-right">
+              <h3 class="m-0 text-left">Сложность</h3>
+            </div>
+            <div class="col-md-9 d-flex flex-column justify-content-end">
+              <p th:text="${program.getDifficulty().getDifficultyName()}" class="lead m-0"></p>
+            </div>
+          </div>
+          <div class="row border">
+            <div class="col-md-3 flex-column justify-content-end border-right">
+              <h3 class="m-0 text-left">Описание<br></h3>
+            </div>
+            <div class="col-md-9 d-flex flex-column justify-content-end">
+              <p th:text="${program.getDescription()}" class="lead m-0"></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5 border">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center">Последовательность упражнений</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-0">
+    <div th:each="programSegment: ${program.getProgramSegments()}" class="container-fluid m-0 mb-4 border">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 th:text="${programSegment.getExercise().getName()}" class="text-center border"></h2>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-md-12">
           <div class="row">
             <div class="col-md-4"></div>
-            <div class="col-md-4 border">
-              <img class="img-fluid d-block mx-auto" th:src="@{/image/{imageId}(imageId=${exercise.getImageId()})}"></div>
+            <div class="col-md-4">
+              <img th:src="@{/image/{id}(id=${programSegment.getExercise().getImageId()})}" class="img-fluid d-block mx-auto border" >
+            </div>
             <div class="col-md-4"></div>
           </div>
           <div class="row">
             <div class="col-md-12">
               <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <h2 class="m-0" contenteditable="true">Группа мышц</h2>
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                  <div class="row border">
+                    <div class="col-md-4 border-right">
+                      <h4 class="">Тип упражнения<br></h4>
                     </div>
-                    <div class="col-md-9">
-                      <p th:text="${exercise.getMuscleGroup().getName()}" class="lead m-0"></p>
+                    <div class="col-md-8">
+                      <p th:text="${programSegment.getProgramSegmentType().getName()}" class="lead"><br></p>
+                    </div>
+                  </div>
+                  <div class="row border">
+                    <div class="col-md-4 border-right">
+                      <h4 class="">Описание<br></h4>
+                    </div>
+                    <div class="col-md-8">
+                      <p th:text="${programSegment.getExercise().getDescription()}" class="lead"></p>
+                    </div>
+                  </div>
+                  <div class="row border">
+                    <div class="col-md-4 border-right">
+                      <h4 class="">Количество подходов<br></h4>
+                    </div>
+                    <div class="col-md-8">
+                      <p th:text="${programSegment.getSetsNumber()}" class="lead"></p>
+                    </div>
+                  </div>
+                  <div class="row border">
+                    <div class="col-md-4 border-right">
+                      <h4 class="">Количество повторений<br></h4>
+                    </div>
+                    <div class="col-md-8">
+                      <p th:text="${programSegment.getRepetitions()}" class="lead"></p>
+                    </div>
+                  </div>
+                  <div class="row border">
+                    <div class="col-md-4 border-right" style="">
+                      <h4 class="">Время отдыха между повторениями(сек)<br><br></h4>
+                    </div>
+                    <div class="col-md-8" style="">
+                      <p th:text="${programSegment.getRestTimeSeconds()}" class="lead">1</p>
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-3">
-                      <h2 class="m-0">Инвентарь<br></h2>
-                    </div>
-                    <div class="col-md-9">
-                      <p th:text="${exercise.getEquipment().getName()}" class="lead m-0"></p>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-3">
-                      <h2 class="m-0">Описание<br></h2>
-                    </div>
-                    <div class="col-md-9">
-                      <p th:text="${exercise.getDescription()}" class="lead m-0"></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-2"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row my-2 border">
-        <div class="col-md-12">
-          <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-              <h1 class="text-center">Детали выполнения</h1>
-            </div>
-            <div class="col-md-4"></div>
-          </div>
-        </div>
-      </div>
-      <div th:each="exercisePart : ${exercise.getExerciseParts()}" class="row my-2 border">
-        <div class="col-md-12">
-          <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-8">
-              <div class="row">
-                <div class="col-md-12">
-                  <img th:src="@{/image/{id}(id=${exercisePart.getImage().getId()})}" class="img-fluid d-block mx-auto">
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <h2 class="m-0">Описание</h2>
-                    </div>
-                    <div class="col-md-9 m-0">
-                      <p th:text="${exercisePart.getDescription()}" class="lead"></p>
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-12 d-flex">
+                          <a class="btn btn-primary mx-auto" th:href="@{/exercise/{id}(id=${programSegment.getExercise().getId()})}" href="#">Детали упражнения<br></a></div>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <div class="col-md-3"></div>
               </div>
             </div>
-            <div class="col-md-2"></div>
           </div>
         </div>
       </div>

@@ -14,6 +14,9 @@ public class ProgramService {
     @Autowired
     private ProgramRepository programRepository;
 
+    public Program get(Long id){
+        return programRepository.findById(id).orElseThrow(() -> new RuntimeException("No such Program"));
+    }
     public Page<Program> getAll(int pageNumber, int pageSize, String sortedField, Sort.Direction direction){
             return programRepository.findAllBy(PageRequest.of(pageNumber, pageSize, direction, sortedField));
     }

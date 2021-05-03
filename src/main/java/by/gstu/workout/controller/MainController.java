@@ -2,13 +2,11 @@ package by.gstu.workout.controller;
 
 import by.gstu.workout.model.Exercise;
 import by.gstu.workout.model.Program;
-import by.gstu.workout.model.ProgramSegment;
 import by.gstu.workout.service.*;
 import by.gstu.workout.service.filtration.FiltrationService;
 import by.gstu.workout.service.sorting.SortingService;
 import by.gstu.workout.utils.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;

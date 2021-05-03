@@ -5,37 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         type="text/css">
-    <link rel="stylesheet" href="../static/css/aquamarine.css">
-    <link rel="stylesheet" href="../static/css/workout.css">
-<!--  <link rel="stylesheet" href="/css/aquamarine.css">-->
-<!--  <link rel="stylesheet" href="/css/workout.css">-->
+<!--    <link rel="stylesheet" href="../static/css/aquamarine.css">-->
+<!--    <link rel="stylesheet" href="../static/css/workout.css">-->
+  <link rel="stylesheet" href="/css/aquamarine.css">
+  <link rel="stylesheet" href="/css/workout.css">
 </head>
 
 <body class="m-0 p-0" style="">
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
   <div class="container">
-    <button class="navbar-toggler navbar-toggler-right border-0 p-0" type="button" data-toggle="collapse"
-            data-target="#navbar14">
-      <p class="navbar-brand mb-0 text-white">
-        <i class="fa d-inline fa-lg fa-stop-circle"></i>Подбор Тренировок</p>
+    <button class="navbar-toggler navbar-toggler-right border-0 p-0" type="button" data-toggle="collapse" data-target="#navbar14">
+      <a href="#">
+        <p class="navbar-brand mb-0 text-white"><i class="fa d-inline fa-lg fa-stop-circle"></i>Подбор Тренировок</p>
+      </a>
     </button>
     <div class="collapse navbar-collapse" id="navbar14">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item"><a class="nav-link" href="/">На главную</a></li>
-        <li class="nav-item"><a class="nav-link" href="/">Упражнения</a></li>
+        <li class="nav-item"><a class="nav-link" href="/exercises">Упражнения</a></li>
         <li class="nav-item"><a class="nav-link" href="/programs">Программы</a></li>
       </ul>
-      <p class="d-none d-md-block lead mb-0  text-white">Подбор Тренировок</p>
+      <a href="/"><p class="d-none d-md-block lead mb-0  text-white">Подбор Тренировок</p></a>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item mx-1"><a class="nav-link" href="#">
-          <i class="fa fa-github fa-fw fa-lg"></i>
-        </a></li>
-        <li class="nav-item mx-1"><a class="nav-link" href="#">
-          <i class="fa fa-gitlab fa-fw fa-lg"></i>
-        </a></li>
-        <li class="nav-item mx-1"><a class="nav-link" href="#">
-          <i class="fa fa-bitbucket fa-fw fa-lg"></i>
-        </a></li>
+<!--        <li class="nav-item mx-1"><a class="nav-link" href="#">-->
+<!--          <i class="fa fa-github fa-fw fa-lg"></i>-->
+<!--        </a></li>-->
+<!--        <li class="nav-item mx-1"><a class="nav-link" href="#">-->
+<!--          <i class="fa fa-gitlab fa-fw fa-lg"></i>-->
+<!--        </a></li>-->
+<!--        <li class="nav-item mx-1"><a class="nav-link" href="#">-->
+<!--          <i class="fa fa-bitbucket fa-fw fa-lg"></i>-->
+<!--        </a></li>-->
       </ul>
     </div>
   </div>
@@ -96,7 +96,9 @@
                          class="exercise-card-image" alt="Card image">
                   </div>
                   <div class="card-body exercise-card-body">
-                    <a class="exercise-header-link" href="#"><h4 th:text="${program.getName()}" class="card-title text-center" style=""><br></h4></a>
+                    <a class="exercise-header-link" th:href="@{/program/{id}(id=${program.getId()})}">
+                      <h4 th:text="${program.getName()}" class="card-title text-center" style=""><br></h4>
+                    </a>
                     <h5 th:text="'Сложность: ' + ${program.getDifficulty().getDifficultyName()}"
                         class="card-title text-center" style="">Группа мышц: Грудные<br></h5>
                   </div>
