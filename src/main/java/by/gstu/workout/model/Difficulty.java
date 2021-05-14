@@ -17,10 +17,10 @@ import javax.persistence.*;
 @SelectBeforeUpdate
 @NoArgsConstructor
 public class Difficulty {
-    @Id//primary key
-    @GeneratedValue(strategy = GenerationType.IDENTITY)//сгенерировать используя сологку в базе данных
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name")//в столбце name
-    @Enumerated(EnumType.STRING)//сравнение по строке
+    @Column(name = "name")
+    @Enumerated(EnumType.STRING)
     private DifficultyName difficultyName;
 }

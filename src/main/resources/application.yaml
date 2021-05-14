@@ -2,11 +2,11 @@ spring:
   datasource:
     username: root
     password: example
-    url: jdbc:mysql://localhost:33061
+    url: jdbc:mysql://localhost:3306
   jpa:
     show-sql: true
 server:
-  port: 8081
+  port: 8080
 service:
   default-sorting-value: По умолчанию
   default-filtration-value: Не выбрано

@@ -2,7 +2,6 @@
 version: '3.1'
 
 services:
-
   db:
     image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password
@@ -10,25 +9,4 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: example
     ports:
-        - "33061:3306"
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
-      
- # mysql-workbench:
-  #  image: ghcr.io/linuxserver/mysql-workbench
-   # container_name: mysql-workbench
-    #environment:
-   #   - PUID=1000
-    #  - PGID=1000
-     # - TZ=Europe/London
- #   volumes:
-#      - /path/to/config:/config
- #   ports:
- #     - 3000:3000
- #   cap_add:
- #     - IPC_LOCK
- #   restart: unless-stopped
+        - "3306:3306"
