@@ -46,7 +46,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <a th:href="@{/exercise/{id}(id=${exercise.getImageId()})}">
+        <a th:href="@{/exercise/{id}(id=${exercise.getId()})}">
           <h1 th:text="${exercise.getName()}" class="display-4 text-center"><br></h1>
         </a>
       </div>
@@ -73,7 +73,7 @@
                     <h2 class="m-0" contenteditable="true">Группа мышц</h2>
                   </div>
                   <div class="col-md-9">
-                    <p th:text="${exercise.getMuscleGroup().getName()}" class="lead m-0"></p>
+                    <p th:text="${exercise.getMuscleGroup() != null ? exercise.getMuscleGroup().getName() : ''}" class="lead m-0"></p>
                   </div>
                 </div>
                 <div class="row">
@@ -81,7 +81,7 @@
                     <h2 class="m-0">Инвентарь<br></h2>
                   </div>
                   <div class="col-md-9">
-                    <p th:text="${exercise.getEquipment().getName()}" class="lead m-0"></p>
+                    <p th:text="${exercise.getEquipment() != null ? exercise.getEquipment().getName() : ''}" class="lead m-0"></p>
                   </div>
                 </div>
                 <div class="row">
@@ -157,10 +157,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-<pingendo onclick="window.open('https://pingendo.com/', '_blank')"
-          style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">
-  Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block"
-                                          alt="Pingendo logo" height="16"></pingendo>
 </body>
 
 </html>

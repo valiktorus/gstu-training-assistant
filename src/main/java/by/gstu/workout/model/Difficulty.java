@@ -22,5 +22,5 @@ public class Difficulty {
     private Long id;
     @Column(name = "name")
     @Enumerated(EnumType.STRING)
-    private DifficultyName difficultyName;
+    private DifficultyName name;
 }

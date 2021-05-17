@@ -67,7 +67,7 @@
               <button id="selected-difficulty" th:text="${selectedDifficulty}" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
               <div class="dropdown-menu">
                 <a th:text="${defaultFiltrationValue}" class="dropdown-item difficulty-filtration-link" href="#"></a>
-                <a th:each="difficulty : ${difficulties}" th:text="${difficulty.getDifficultyName()}" class="dropdown-item difficulty-filtration-link" href="#"></a>
+                <a th:each="difficulty : ${difficulties}" th:text="${difficulty.getName()}" class="dropdown-item difficulty-filtration-link" href="#"></a>
               </div>
             </div>
           </div>
@@ -99,7 +99,7 @@
                     <a class="exercise-header-link" th:href="@{/program/{id}(id=${program.getId()})}">
                       <h4 th:text="${program.getName()}" class="card-title text-center" style=""><br></h4>
                     </a>
-                    <h5 th:text="'Сложность: ' + ${program.getDifficulty().getDifficultyName()}"
+                    <h5 th:text="'Сложность: ' + ${program.getDifficulty().getName()}"
                         class="card-title text-center" style="">Группа мышц: Грудные<br></h5>
                   </div>
                 </div>
@@ -156,10 +156,6 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 <script src="/js/programsButtonEvents.js"></script>
-<pingendo onclick="window.open('https://pingendo.com/', '_blank')"
-          style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">
-  Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block"
-                                          alt="Pingendo logo" height="16"></pingendo>
 </body>
 
 </html>

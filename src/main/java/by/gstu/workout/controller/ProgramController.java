@@ -16,7 +16,7 @@ public class ProgramController {
     @Autowired
     private ProgramService programService;
     @GetMapping("/program/{id}")
-    public String getSingleExercisePage(@PathVariable Long id, Model model){
+    public String getSingleProgramPage(@PathVariable Long id, Model model){
         Program program = programService.get(id);
         program.getProgramSegments().sort(Comparator.comparing(ProgramSegment::getOrder));
         model.addAttribute("program", programService.get(id));

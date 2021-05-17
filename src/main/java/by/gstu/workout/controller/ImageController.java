@@ -17,9 +17,8 @@ public class ImageController {
     private ImageService imageService;
     @GetMapping("/image/{imageId}")
     @ResponseBody
-    public void greeting(@PathVariable(name = "imageId") Long imageId, HttpServletResponse response, Model model)
+    public void getImage(@PathVariable(name = "imageId") Long imageId, HttpServletResponse response, Model model)
             throws IOException {
-        response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
         response.getOutputStream().write(imageService.getById(imageId).getImage());
         response.getOutputStream().close();
     }

@@ -1,5 +1,6 @@
 package by.gstu.workout.controller;
 
+import by.gstu.workout.Constants;
 import by.gstu.workout.model.Exercise;
 import by.gstu.workout.model.Program;
 import by.gstu.workout.service.*;
@@ -35,48 +36,35 @@ public class MainController {
 
 
     @GetMapping(value = {"/", "/home", "/exercises"})
-    public String getExercises(@RequestParam Optional<Integer> page,
-                               @RequestParam Optional<Integer> pageSize,
-                               @RequestParam(defaultValue = "") String muscleGroup,
-                               @RequestParam(defaultValue = "") String equipment,
-                               @RequestParam(defaultValue = "id") String sortedBy,
+    public String getExercises(@RequestParam(defaultValue = "1") Integer page,
+                               @RequestParam(defaultValue = "2") Integer pageSize,
+                               @RequestParam(defaultValue = Constants.DEFAULT_FILTRATION_VALUE) String muscleGroup,
+                               @RequestParam(defaultValue = Constants.DEFAULT_FILTRATION_VALUE) String equipment,
+                               @RequestParam(defaultValue = Constants.DEFAULT_SORTING_VALUE) String sortedBy,
                                Model model) {
-        int currentPage = page.orElse(1);
-        int currentPageSize = pageSize.orElse(2);
-        String currentMuscleGroup = filtrationService.getCurrentMuscleGroup(muscleGroup);
-        String currentEquipment = filtrationService.getCurrentEquipment(equipment);
-        Page<Exercise> exercisesPage = exerciseService.getAllByMuscleGroupAndEquipment(currentMuscleGroup, currentEquipment,
-                currentPage - 1, currentPageSize, sortedBy, Sort.Direction.ASC);
+        Page<Exercise> exercisesPage = exerciseService.getAllByMuscleGroupAndEquipment(muscleGroup, equipment,
+                page, pageSize, sortedBy, Sort.Direction.ASC);
         Pager<Exercise> pager = new Pager<>(exercisesPage);
         model.addAttribute("pager", pager);
         model.addAttribute("exercises", exercisesPage.getContent());
         model.addAttribute("muscleGroups", muscleGroupService.getAll());
         model.addAttribute("equipments", equipmentService.getAll());
-        model.addAttribute("defaultFiltrationValue", filtrationService.getDefaultFiltrationValue());
-        model.addAttribute("defaultSortingValue", sortingService.getDefaultSortingField());
+        model.addAttribute("defaultFiltrationValue", Constants.DEFAULT_FILTRATION_VALUE);
+        model.addAttribute("defaultSortingValue", Constants.DEFAULT_SORTING_VALUE);
         model.addAttribute("sortingFields", sortingService.getExerciseSortingFields());
-        model.addAttribute("selectedEquipment", filtrationService.getSelectedEquipment(equipment));
-        model.addAttribute("selectedMuscleGroup", filtrationService.getSelectedMuscleGroup(muscleGroup));
+        model.addAttribute("selectedEquipment", equipment);
+        model.addAttribute("selectedMuscleGroup", muscleGroup);
         model.addAttribute("selectedSortingField", sortedBy);
         return "exercises";
     }
 
     @GetMapping(value = {"/programs"})
-    public String getPrograms(@RequestParam Optional<Integer> page,
-                              @RequestParam Optional<Integer> pageSize,
-                              @RequestParam(defaultValue = "") String difficulty,
-                              @RequestParam(defaultValue = "id") String sortedBy,
+    public String getPrograms(@RequestParam(defaultValue = "1") Integer page,
+                              @RequestParam(defaultValue = "2") Integer pageSize,
+                              @RequestParam(defaultValue = Constants.DEFAULT_FILTRATION_VALUE) String difficulty,
+                              @RequestParam(defaultValue = Constants.DEFAULT_SORTING_VALUE) String sortedBy,
                               Model model) {
-        int currentPage = page.orElse(1);
-        int currentPageSize = pageSize.orElse(2);
-        String currentDifficulty = filtrationService.getCurrentDifficulty(difficulty);
-//        String sortedField = sortingService.getCurrentSortingField(sortedBy);
-        Page<Program> programPage;
-        if (currentDifficulty.isEmpty()) {
-            programPage = programService.getAll(currentPage - 1, currentPageSize, sortedBy, Sort.Direction.ASC);
-        } else {
-            programPage = programService.getAllByDifficulty(currentDifficulty, currentPage - 1, currentPageSize, sortedBy, Sort.Direction.ASC);
-        }
+        Page<Program> programPage = programService.getAllByDifficulty(difficulty, page, pageSize, sortedBy, Sort.Direction.ASC);
         Pager<Program> pager = new Pager<>(programPage);
         model.addAttribute("pager", pager);
         model.addAttribute("programs", programPage.getContent());
@@ -84,7 +72,7 @@ public class MainController {
         model.addAttribute("defaultFiltrationValue", filtrationService.getDefaultFiltrationValue());
         model.addAttribute("defaultSortingValue", sortingService.getDefaultSortingField());
         model.addAttribute("sortingFields", sortingService.getProgramSortingFields());
-        model.addAttribute("selectedDifficulty", filtrationService.getSelectedDifficulty(difficulty));
+        model.addAttribute("selectedDifficulty", difficulty);
         model.addAttribute("selectedSortingField", sortedBy);
         return "programs";
     }
