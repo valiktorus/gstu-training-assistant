@@ -9,9 +9,9 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 
 import javax.persistence.*;
 
-@Entity//сущность в JPA
-@Table(name = "difficulty", catalog = "fitness") //table and database
-@Data//get set allArgConstructor toString equals hashcode
+@Entity
+@Table(name = "difficulty", catalog = "fitness")
+@Data
 @DynamicUpdate
 @DynamicInsert
 @SelectBeforeUpdate

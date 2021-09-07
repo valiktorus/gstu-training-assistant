@@ -10,4 +10,13 @@ server:
 service:
   default-sorting-value: По умолчанию
   default-filtration-value: Не выбрано
-
+okta:
+  oauth2:
+    issuer: https://dev-62617957.okta.com/oauth2/default
+    client-id: 0oa1nv8b5520wy8gi5d7
+    client-secret: tE-R2rER2EjrGtac-5X3woH-o6LZVWRNMJCip5Ez
+    redirect-uri: /authorization-code/callback
+    scopes:
+      - openid
+      - email
+      - profile

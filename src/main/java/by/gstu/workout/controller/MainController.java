@@ -4,7 +4,6 @@ import by.gstu.workout.Constants;
 import by.gstu.workout.model.Exercise;
 import by.gstu.workout.model.Program;
 import by.gstu.workout.service.*;
-import by.gstu.workout.service.filtration.FiltrationService;
 import by.gstu.workout.service.sorting.SortingService;
 import by.gstu.workout.utils.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Optional;
 
 @Controller
 public class MainController {
@@ -28,8 +25,6 @@ public class MainController {
     @Autowired
     private SortingService sortingService;
     @Autowired
-    private FiltrationService filtrationService;
-    @Autowired
     private DifficultyService difficultyService;
     @Autowired
     private ProgramService programService;
@@ -37,7 +32,7 @@ public class MainController {
 
     @GetMapping(value = {"/", "/home", "/exercises"})
     public String getExercises(@RequestParam(defaultValue = "1") Integer page,
-                               @RequestParam(defaultValue = "2") Integer pageSize,
+                               @RequestParam(defaultValue = "6") Integer pageSize,
                                @RequestParam(defaultValue = Constants.DEFAULT_FILTRATION_VALUE) String muscleGroup,
                                @RequestParam(defaultValue = Constants.DEFAULT_FILTRATION_VALUE) String equipment,
                                @RequestParam(defaultValue = Constants.DEFAULT_SORTING_VALUE) String sortedBy,
@@ -60,7 +55,7 @@ public class MainController {
 
     @GetMapping(value = {"/programs"})
     public String getPrograms(@RequestParam(defaultValue = "1") Integer page,
-                              @RequestParam(defaultValue = "2") Integer pageSize,
+                              @RequestParam(defaultValue = "6") Integer pageSize,
                               @RequestParam(defaultValue = Constants.DEFAULT_FILTRATION_VALUE) String difficulty,
                               @RequestParam(defaultValue = Constants.DEFAULT_SORTING_VALUE) String sortedBy,
                               Model model) {
@@ -69,7 +64,7 @@ public class MainController {
         model.addAttribute("pager", pager);
         model.addAttribute("programs", programPage.getContent());
         model.addAttribute("difficulties", difficultyService.getAll());
-        model.addAttribute("defaultFiltrationValue", filtrationService.getDefaultFiltrationValue());
+        model.addAttribute("defaultFiltrationValue", Constants.DEFAULT_FILTRATION_VALUE);
         model.addAttribute("defaultSortingValue", sortingService.getDefaultSortingField());
         model.addAttribute("sortingFields", sortingService.getProgramSortingFields());
         model.addAttribute("selectedDifficulty", difficulty);

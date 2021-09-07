@@ -17,7 +17,7 @@ import java.util.Objects;
 public class ExerciseService {
 
     @Autowired
-    private ExerciseRepository exerciseRepository;
+    private  ExerciseRepository exerciseRepository;
     @Autowired
     private SortingService sortingService;
 
