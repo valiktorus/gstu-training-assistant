@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/admin/admin-head-fragment :: admin-head">
+<body>
+<div id="admin-header"></div>
+<div id="admin-main" class="ui grid">
+  <div id="admin-side-menu" class="four wide column" th:insert="fragments/admin/admin-side-menu :: admin-side-menu"></div>
+  <div id="admin-main-content" class="twelve wide stretched column">
+    <div class="ui segment">
+      <h2 class="ui header center aligned grey">Удаление или изменение Программы тренировок</h2>
+      <table class="ui celled table">
+        <thead>
+        <tr>
+          <th>Идентификатор</th>
+          <th>Название программы</th>
+          <th>Изображение</th>
+          <th>Сложность</th>
+          <th>Описание</th>
+          <th>Доступные действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="program: ${programs}">
+          <td data-label="id" th:text="${program.getId()}"></td>
+          <td data-label="name" th:text="${program.getName()}"></td>
+          <td data-label="image">
+            <img style="width: 150px" th:src="@{/image/{imageId}(imageId=${program.getImage().getId()})}">
+          </td>
+          <td data-label="difficulty" th:text="${program.getDifficulty().getName()}"></td>
+          <td data-label="description" th:text="${program.getDescription()}"></td>
+
+          <td data-label="buttons">
+            <button class="ui yellow basic button">
+              <a th:href="@{/admin/program/edit/{id}(id=${program.getId()})}">Изменить</a>
+            </button>
+            <form method="post" th:action="@{/admin/program/delete/{id}(id=${program.getId()})}">
+              <button type="submit" class="ui red basic button">Удалить</button>
+            </form>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script>
+    $("#admin-header").load("/admin-parts/admin-header.html")
+</script>
+</body>
+</html>

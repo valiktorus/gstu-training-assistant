@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/admin/admin-head-fragment :: admin-head">
+</head>
+<body>
+<div id="admin-header"></div>
+<div id="admin-main" class="ui grid">
+  <div id="admin-side-menu" class="four wide column" th:insert="fragments/admin/admin-side-menu :: admin-side-menu"></div>
+  <div id="admin-main-content" class="twelve wide stretched column">
+    <form id="add" class="ui form" method="post" th:action="@{/admin/program/add}" enctype="multipart/form-data">
+      <div class="field">
+        <label>Название</label>
+        <input type="text" name="name">
+      </div>
+      <!--      images-->
+      <div class="field">
+        <label>Изображение</label>
+        <input name="newImage" type="file">
+      </div>
+      <!--      dropdown-->
+      <div class="field">
+        <label>Сложность</label>
+        <select name="difficulty" form="add" class="ui search dropdown">
+          <div th:each="difficulty: ${difficulties}">
+            <option th:value="${difficulty.getId()}"
+                    th:text="${difficulty.getName()}" selected>
+            </option>
+          </div>
+        </select>
+      </div>
+      <!--Число-->
+      <div class="field">
+        <label>Время отдыха между сегментами программы в секундах</label>
+        <input type="number" name="rest-time">
+      </div>
+      <!--      text-->
+      <div class="field">
+        <label>Описание</label>
+        <textarea type="" name="description"></textarea>
+      </div>
+      <button class="ui button" type="submit">Отправить</button>
+    </form>
+  </div>
+</div>
+<script>
+
+    $("#admin-header").load("/admin-parts/admin-header.html")
+
+</script>
+</body>
+</html>

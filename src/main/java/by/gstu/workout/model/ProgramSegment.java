@@ -1,5 +1,6 @@
 package by.gstu.workout.model;
 
+import by.gstu.workout.service.ProgramSegmentService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,13 +30,14 @@ public class ProgramSegment {
     private int setsNumber;
     @Column(name = "rest_time_seconds")
     private int restTimeSeconds;
+    @Column(name = "element_time_seconds")
+    private int elementRestTimeSeconds;
     @JoinColumn(name = "exercise_id")
     @ManyToOne
     private Exercise exercise;
     @JoinColumn(name = "program_id")
     @ManyToOne
     private Program program;
-    @JoinColumn(name = "type_id")
-    @ManyToOne
-    private ProgramSegmentType programSegmentType;
+    @Column(name = "type_id")
+    private String programSegmentType;
 }

@@ -75,7 +75,12 @@
         <!--      buttons-->
         <button class="ui button" type="submit">Изменить информацию о части тренировки</button>
       </form>
+      <form method="post" th:action="@{/admin/exercisepart/delete/{id}(id=${exercisePart.getId()})}">
+        <button type="submit" class="ui red basic button">Удалить этап уражнения</button>
+      </form>
     </div>
+
+<!--Добавление нового этапа-->
 
     <h2 class="ui header">Добавление этапа упражнения</h2>
     <form class="ui form" method="post" th:action="@{/admin/exercisepart/add/{id}(id=${exercise.getId()})}"

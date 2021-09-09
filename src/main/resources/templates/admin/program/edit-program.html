@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/admin/admin-head-fragment :: admin-head">
+</head>
+<body>
+<div id="admin-header"></div>
+<div id="admin-main" class="ui grid">
+  <div id="admin-side-menu" class="four wide column"
+       th:insert="fragments/admin/admin-side-menu :: admin-side-menu"></div>
+  <div id="admin-main-content" class="twelve wide stretched column">
+    <h2 class="ui header">Общая информация</h2>
+    <form id="edit" class="ui form" method="post" th:action="@{/admin/program/edit/{id}(id=${program.getId()})}"
+          enctype="multipart/form-data">
+      <div class="field">
+        <label>Название</label>
+        <input type="text" name="name" th:value="${program.getName()}">
+      </div>
+      <!--      images-->
+      <div class="field">
+        <label>Изображение</label>
+        <img style="width: 200px" th:src="@{/image/{imageId}(imageId=${program.getImage().getId()})}">
+        <input name="newImage" type="file">
+      </div>
+      <!--      dropdown-->
+      <div class="field">
+        <label>Сложность</label>
+        <select name="difficulty" form="edit" class="ui search dropdown">
+          <div th:each="difficulty: ${difficulties}">
+            <option th:value="${difficulty.getId()}"
+                    th:text="${difficulty.getName()}"
+                    th:selected="${difficulty.getId() == program.getDifficulty().getId()}">
+            </option>
+          </div>
+        </select>
+      </div>
+<!--Число-->
+      <div class="field">
+        <label>Время отдыха между сегментами программы в секундах</label>
+        <input type="number" name="rest-time" th:value="${program.getRestTimeSeconds()}">
+      </div>
+      <!--      text-->
+      <div class="field">
+        <label>Описание</label>
+        <textarea type="" name="description" th:text="${program.getDescription()}"></textarea>
+      </div>
+      <!--      buttons-->
+      <button class="ui button" type="submit">Изменить Общую информацию</button>
+    </form>
+
+    <h2 class="ui header">Информация о сегментах программы тренировок</h2>
+    <div th:each="programSegment: ${program.getProgramSegments()}">
+      <form id="edit-segment" class="ui form" method="post" th:action="@{/admin/programsegment/edit/{id}(id=${programSegment.getId()})}"
+            enctype="multipart/form-data">
+        <div class="field">
+          <label>Очередь</label>
+          <input type="number" name="order" th:value="${programSegment.getOrder()}">
+        </div>
+        <div class="field">
+
+          <label>Упражнение</label>
+          <img style="width: 150px" th:src="@{/image/{imageId}(imageId=${programSegment.getExercise().getImageId()})}" >
+          <select name="exercise" form="edit-segment" class="ui search dropdown">
+            <div th:each="exercise: ${exercises}">
+              <option th:value="${exercise.getId()}"
+                      th:text="${exercise.getName()}"
+                      th:selected="${exercise.getId() == programSegment.getExercise().getId()}">
+              </option>
+            </div>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Тип</label>
+          <input type="text" name="segment-type" th:value="${programSegment.getProgramSegmentType()}">
+        </div>
+
+        <div class="field">
+          <label>Количество подходов</label>
+          <input type="number" name="sets" th:value="${programSegment.getSetsNumber()}">
+        </div>
+
+        <div class="field">
+          <label>Время отдыха между подходани</label>
+          <input type="number" name="rest-time" th:value="${programSegment.getRestTimeSeconds()}">
+        </div>
+
+        <div class="field">
+          <label>Количество повторений в подходе</label>
+          <input type="number" name="repetitions" th:value="${programSegment.getRepetitions()}">
+        </div>
+
+        <div class="field">
+          <label>Время отдыха между повторениями</label>
+          <input type="number" name="element-rest-time" th:value="${programSegment.getElementRestTimeSeconds()}">
+        </div>
+
+        <!--      buttons-->
+        <button class="ui button" type="submit">Изменить информацию о части тренировки</button>
+      </form>
+      <form method="post" th:action="@{/admin/programsegment/delete/{id}(id=${programSegment.getId()})}">
+        <button type="submit" class="ui red basic button">Удалить этап уражнения</button>
+      </form>
+    </div>
+
+<!--Добавление нового этапа-->
+
+    <h2 class="ui header">Добавление сегмента программы тренировок</h2>
+    <form id="add-segment" class="ui form" method="post" th:action="@{/admin/programsegment/add/{id}(id=${program.getId()})}"
+          enctype="multipart/form-data">
+      <div class="field">
+        <label>Очередь</label>
+        <input type="number" name="order">
+      </div>
+      <div class="field">
+
+        <label>Упражнение</label>
+        <select name="exercise" form="add-segment" class="ui search dropdown">
+          <div th:each="exercise: ${exercises}">
+            <option th:value="${exercise.getId()}"
+                    th:text="${exercise.getName()}" selected>
+            </option>
+          </div>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Тип</label>
+        <input type="text" name="segment-type">
+      </div>
+
+      <div class="field">
+        <label>Количество подходов</label>
+        <input type="number" name="sets">
+      </div>
+
+      <div class="field">
+        <label>Время отдыха между подходани</label>
+        <input type="number" name="rest-time">
+      </div>
+
+      <div class="field">
+        <label>Количество повторений в подходе</label>
+        <input type="number" name="repetitions">
+      </div>
+
+      <div class="field">
+        <label>Время отдыха между повторениями</label>
+        <input type="number" name="element-rest-time">
+      </div>
+      <!--      buttons-->
+      <button class="ui button" type="submit">Добавить сегмент программы</button>
+    </form>
+  </div>
+</div>
+<script>
+    $("#admin-header").load("/admin-parts/admin-header.html")
+</script>
+</body>
+</html>

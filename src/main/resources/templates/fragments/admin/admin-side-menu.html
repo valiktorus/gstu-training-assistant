@@ -2,7 +2,7 @@
 <body>
 <div>
 <div class="ui vertical fluid tabular menu grey" th:fragment="admin-side-menu">
-  <a id="side-menu-general" class="item admin-side-menu-element" th:classappend="${activeMenu == 'side-menu-general'} ? active">
+  <a id="side-menu-general" class="item admin-side-menu-element" th:classappend="${activeMenu == 'side-menu-general'} ? active" th:href="@{/admin}">
     Общая информация
   </a>
   <a id="side-menu-add-eq" th:classappend="${activeMenu == 'side-menu-add-eq'} ? active" class="item admin-side-menu-element" th:href="@{/admin/add/equipment}">
@@ -29,10 +29,10 @@
   <a id="side-menu-del-exercise" th:classappend="${activeMenu == 'side-menu-del-exercise'} ? active"  class="item admin-side-menu-element" th:href="@{/admin/exercise/list}">
     Изменить или удалить упражнение
   </a>
-  <a id="side-menu-add-program" th:classappend="${activeMenu == 'side-menu-add-program'} ? active"  class="item admin-side-menu-element">
+  <a id="side-menu-add-program" th:classappend="${activeMenu == 'side-menu-add-program'} ? active"  class="item admin-side-menu-element" th:href="@{/admin/program/add}">
     Добавить новую программу тренировок
   </a>
-  <a id="side-menu-del-program" th:classappend="${activeMenu == 'side-menu-del-program'} ? active"  class="item admin-side-menu-element">
+  <a id="side-menu-del-program" th:classappend="${activeMenu == 'side-menu-del-program'} ? active"  class="item admin-side-menu-element" th:href="@{/admin/program/list}">
     Изменить или удалить программу тренировок
   </a>
 </div>

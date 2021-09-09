@@ -110,6 +110,17 @@ public class AdminExerciseController {
         return "admin/exercise/list-exercises";
     }
 
+    @PostMapping("/admin/exercisepart/delete/{id}")
+    public String deleteExercisePart(@PathVariable Long id, Model model) {
+        ExercisePart exercisePart = exercisePartService.get(id);
+        exercisePartService.delete(exercisePart);
+        model.addAttribute("activeMenu", "side-menu-del-exercise");
+        model.addAttribute("exercises", exerciseService.getAll());
+        model.addAttribute("muscles", muscleGroupService.getAll());
+        model.addAttribute("equipments", equipmentService.getAll());
+        return "admin/exercise/list-exercises";
+    }
+
     @GetMapping("/admin/exercise/add")
     public String addMusclePage(Model model) {
         model.addAttribute("activeMenu", "side-menu-add-exercise");

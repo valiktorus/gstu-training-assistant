@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -27,6 +28,10 @@ public class ProgramService {
         return programRepository.findById(id).orElseThrow(() -> new RuntimeException("No such Program"));
     }
 
+    public List<Program> getAll(){
+        return programRepository.findAll();
+    }
+
     public Page<Program> getAllByDifficulty(String difficulty, int pageNumber,
                                             int pageSize, String sortedField, Sort.Direction direction) {
         String currentDifficulty = Constants.DEFAULT_FILTRATION_VALUE.equals(difficulty) ? null : difficulty;
@@ -37,5 +42,12 @@ public class ProgramService {
             return programRepository.findAll(pageRequest);
         }
         return programRepository.findAllByDifficultyName(DifficultyName.valueOf(difficulty), pageRequest);
+    }
+
+    public Program save(Program program) {
+        return programRepository.save(program);
+    }
+    public void delete(Long programId) {
+        programRepository.delete(get(programId));
     }
 }

@@ -29,4 +29,7 @@ public class ExercisePartService {
     public void save(ExercisePart exercisePart) {
         customNativeRepository.insertExercisePart(exercisePart);
     }
+    public void delete(ExercisePart exercisePart){
+        exercisePartRepository.delete(exercisePart);
+    }
 }
