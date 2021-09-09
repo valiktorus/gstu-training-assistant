@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/admin/admin-head-fragment :: admin-head">
+<body>
+<div id="admin-header"></div>
+<div id="admin-main" class="ui grid">
+  <div id="admin-side-menu" class="four wide column" th:insert="fragments/admin/admin-side-menu :: admin-side-menu"></div>
+  <div id="admin-main-content" class="twelve wide stretched column">
+    <div class="ui segment">
+      <h2 class="ui header center aligned grey">Удаление или изменение снаряжения</h2>
+      <table class="ui celled table">
+        <thead>
+        <tr>
+          <th>Идентификатор</th>
+          <th>Название упражнения</th>
+          <th>Изображение</th>
+          <th>Мышечная группа</th>
+          <th>Снаряжение</th>
+          <th>Доступные действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="exercise: ${exercises}">
+          <td data-label="id" th:text="${exercise.getId()}"></td>
+          <td data-label="name" th:text="${exercise.getName()}"></td>
+          <td data-label="image">
+            <img style="width: 150px" th:src="@{/image/{imageId}(imageId=${exercise.getImageId()})}">
+          </td>
+          <td data-label="muscleGroup" th:text="${exercise.muscleGroup.getName()}"></td>
+          <td data-label="equipment" th:text="${exercise.equipment == null ? '' : exercise.equipment.getName()}"></td>
+          <td data-label="buttons">
+            <button class="ui yellow basic button">
+              <a th:href="@{/admin/exercise/edit/{id}(id=${exercise.getId()})}">Изменить</a>
+            </button>
+            <form method="post" th:action="@{/admin/exercise/delete/{id}(id=${exercise.getId()})}">
+              <button type="submit" class="ui red basic button">Удалить</button>
+            </form>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script>
+    $("#admin-header").load("/admin-parts/admin-header.html")
+</script>
+</body>
+</html>

@@ -12,4 +12,8 @@ public class ImageService {
     public Image getById(Long id){
         return imageRepository.findById(id).orElse(new Image());
     }
+
+    public Image save(Image image) {
+        return imageRepository.save(image);
+    }
 }

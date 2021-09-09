@@ -21,6 +21,6 @@ public class Difficulty {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "name")
-    @Enumerated(EnumType.STRING)
-    private DifficultyName name;
+//    @Enumerated(EnumType.STRING)
+    private String name;
 }

@@ -20,6 +20,8 @@ public class ProgramService {
     private ProgramRepository programRepository;
     @Autowired
     private SortingService sortingService;
+    @Autowired
+    private ImageService imageService;
 
     public Program get(Long id) {
         return programRepository.findById(id).orElseThrow(() -> new RuntimeException("No such Program"));

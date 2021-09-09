@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div>
+<div class="ui vertical fluid tabular menu grey" th:fragment="admin-side-menu">
+  <a id="side-menu-general" class="item admin-side-menu-element" th:classappend="${activeMenu == 'side-menu-general'} ? active">
+    Общая информация
+  </a>
+  <a id="side-menu-add-eq" th:classappend="${activeMenu == 'side-menu-add-eq'} ? active" class="item admin-side-menu-element" th:href="@{/admin/add/equipment}">
+    Добавить новое снаряжение
+  </a>
+  <a id="side-menu-del-eq" th:classappend="${activeMenu == 'side-menu-del-eq'} ? active"  class="item admin-side-menu-element" th:href="@{/admin/delete/equipment}">
+    Изменить или удалить снаряжение
+  </a>
+  <a id="side-menu-add-dif" th:classappend="${activeMenu == 'side-menu-add-dif'} ? active"  class="item admin-side-menu-element" th:href="@{/admin/difficulty/add}">
+    Добавить новую сложность
+  </a>
+  <a id="side-menu-del-dif" th:classappend="${activeMenu == 'side-menu-del-dif'} ? active"  class="item admin-side-menu-element" th:href="@{/admin/difficulty/list}">
+    Изменить или удалить сложность
+  </a>
+  <a id="side-menu-add-muscle" th:classappend="${activeMenu == 'side-menu-add-muscle'} ? active"  class="item admin-side-menu-element" th:href="@{/admin/muscle/add}">
+    Добавить новую мышечную группу
+  </a>
+  <a id="side-menu-del-muscle" th:classappend="${activeMenu == 'side-menu-del-muscle'} ? active"  class="item admin-side-menu-element" th:href="@{/admin/muscle/list}">
+    Изменить или удалить мышечную группу
+  </a>
+  <a id="side-menu-add-exercise" th:classappend="${activeMenu == 'side-menu-add-exercise'} ? active"  class="item admin-side-menu-element" th:href="@{/admin/exercise/add}">
+    Добавить новое упражнение
+  </a>
+  <a id="side-menu-del-exercise" th:classappend="${activeMenu == 'side-menu-del-exercise'} ? active"  class="item admin-side-menu-element" th:href="@{/admin/exercise/list}">
+    Изменить или удалить упражнение
+  </a>
+  <a id="side-menu-add-program" th:classappend="${activeMenu == 'side-menu-add-program'} ? active"  class="item admin-side-menu-element">
+    Добавить новую программу тренировок
+  </a>
+  <a id="side-menu-del-program" th:classappend="${activeMenu == 'side-menu-del-program'} ? active"  class="item admin-side-menu-element">
+    Изменить или удалить программу тренировок
+  </a>
+</div>
+</div>
+</body>
+</html>

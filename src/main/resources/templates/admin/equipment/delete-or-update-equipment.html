@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/admin/admin-head-fragment :: admin-head">
+<body>
+<div id="admin-header"></div>
+<div id="admin-main" class="ui grid">
+  <div id="admin-side-menu" class="four wide column" th:insert="fragments/admin/admin-side-menu :: admin-side-menu"></div>
+  <div id="admin-main-content" class="twelve wide stretched column">
+    <div class="ui segment">
+      <h2 class="ui header center aligned grey">Удаление или изменение снаряжения</h2>
+      <table class="ui celled table">
+        <thead>
+        <tr>
+          <th>Идентификатор</th>
+          <th>Имя снаряжения</th>
+          <th>Картинка</th>
+          <th>Доступные действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="equipment: ${equipments}">
+          <td data-label="id" th:text="${equipment.getId()}"></td>
+          <td data-label="name" th:text="${equipment.getName()}"></td>
+          <td data-label="image">
+            <img style="width: 150px" th:src="@{/image/{imageId}(imageId=${equipment.getImage().getId()})}">
+          </td>
+          <td data-label="buttons">
+            <button class="ui yellow basic button">
+              <a th:href="@{/admin/update/equipment/{id}(id=${equipment.getId()})}">Изменить</a>
+            </button>
+            <form method="post" th:action="@{/admin/delete/equipment/{id}(id=${equipment.getId()})}">
+              <button type="submit" class="ui red basic button">Удалить</button>
+            </form>
+
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script>
+    $("#admin-header").load("/admin-parts/admin-header.html")
+    // $("#admin-side-menu").load("/admin-parts/admin-side-menu.html")
+    // $("#admin-main-content").load("/admin-parts/admin-main-content.html")
+    // $(`#${activeMenu}`).addClass("active")
+    // $(document).on('click', '.admin-side-menu-element', function (){
+    //     $('.admin-side-menu-element').removeClass('active');
+    //     $(this).addClass("active");
+    // });
+
+    function loadMainContent(htmlPageName) {
+        $("#admin-main-content").load(`/${htmlPageName}`)
+    }
+
+</script>
+</body>
+</html>

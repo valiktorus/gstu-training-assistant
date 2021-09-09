@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/admin/admin-head-fragment :: admin-head">
+</head>
+<body>
+<div id="admin-header"></div>
+<div id="admin-main" class="ui grid">
+  <div id="admin-side-menu" class="four wide column"
+       th:insert="fragments/admin/admin-side-menu :: admin-side-menu"></div>
+  <div id="admin-main-content" class="twelve wide stretched column">
+    <h2 class="ui header">Общая информация</h2>
+    <form id="edit" class="ui form" method="post" th:action="@{/admin/exercise/edit/{id}(id=${exercise.getId()})}"
+          enctype="multipart/form-data">
+      <div class="field">
+        <label>Название</label>
+        <input type="text" name="name" th:value="${exercise.getName()}">
+      </div>
+      <!--      images-->
+      <div class="field">
+        <label>Изображение</label>
+        <img style="width: 200px" th:src="@{/image/{imageId}(imageId=${exercise.getImageId()})}">
+        <input name="newImage" type="file">
+      </div>
+      <!--      dropdown-->
+      <div class="field">
+        <label>Мышечная группа</label>
+        <select name="muscle" form="edit" class="ui search dropdown">
+          <div th:each="muscle: ${muscles}">
+            <option th:value="${muscle.getId()}"
+                    th:text="${muscle.getName()}"
+                    th:selected="${muscle.getId() == exercise.muscleGroup.getId()}">
+            </option>
+          </div>
+        </select>
+      </div>
+      <!--      dropdown-->
+      <div class="field">
+        <label>Снаряжение</label>
+        <select name="equipment" form="edit" class="ui search dropdown">
+          <div th:each="equipment: ${equipments}">
+            <option th:value="${equipment.getId()}"
+                    th:text="${equipment.getName()}"
+                    th:selected="${equipment.getId() == exercise.equipment.getId()}">
+            </option>
+          </div>
+        </select>
+      </div>
+      <!--      text-->
+      <div class="field">
+        <label>Описание</label>
+        <textarea type="" name="description" th:text="${exercise.getDescription()}"></textarea>
+      </div>
+      <!--      buttons-->
+      <button class="ui button" type="submit">Изменить Общую информацию</button>
+    </form>
+    <h2 class="ui header">Информация о этапах упражнения</h2>
+    <div th:each="exercisePart: ${exercise.getExerciseParts()}">
+      <form class="ui form" method="post" th:action="@{/admin/exercisepart/edit/{id}(id=${exercisePart.getId()})}"
+            enctype="multipart/form-data">
+        <div class="field">
+          <label>Очередь</label>
+          <input type="number" name="order" th:value="${exercisePart.getOrder()}">
+        </div>
+        <!--      images-->
+        <div class="field">
+          <label>Изображение</label>
+          <img style="width: 200px" th:src="@{/image/{imageId}(imageId=${exercisePart.getImage().getId()})}">
+          <input name="newImage" type="file">
+        </div>
+        <!--      text-->
+        <div class="field">
+          <label>Описание</label>
+          <textarea type="" name="description" th:text="${exercisePart.getDescription()}"></textarea>
+        </div>
+        <!--      buttons-->
+        <button class="ui button" type="submit">Изменить информацию о части тренировки</button>
+      </form>
+    </div>
+
+    <h2 class="ui header">Добавление этапа упражнения</h2>
+    <form class="ui form" method="post" th:action="@{/admin/exercisepart/add/{id}(id=${exercise.getId()})}"
+          enctype="multipart/form-data">
+      <div class="field">
+        <label>Очередь</label>
+        <input type="number" name="order">
+      </div>
+      <!--      images-->
+      <div class="field">
+        <label>Изображение</label>
+        <input name="newImage" type="file">
+      </div>
+      <!--      text-->
+      <div class="field">
+        <label>Описание</label>
+        <textarea type="" name="description"></textarea>
+      </div>
+      <!--      buttons-->
+      <button class="ui button" type="submit">Добавить этап упражнения</button>
+    </form>
+  </div>
+</div>
+<script>
+    $("#admin-header").load("/admin-parts/admin-header.html")
+</script>
+</body>
+</html>

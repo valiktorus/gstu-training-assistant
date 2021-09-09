@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin panel</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+          integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+          integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/js/adminEvents.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+        integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <style>
+      body {
+          background-image: url("/images/workout-wp.jpg");
+      }
+  </style>
+</head>
+<body>
+<div id="admin-header"></div>
+<div id="admin-main" class="ui grid">
+  <div id="admin-side-menu" class="four wide column" th:insert="fragments/admin/admin-side-menu :: admin-side-menu"></div>
+  <div id="admin-main-content" class="twelve wide stretched column">
+  </div>
+</div>
+<script th:inline="javascript">
+
+
+    $("#admin-header").load("/admin-parts/admin-header.html")
+    // $("#admin-side-menu").load("/admin-parts/admin-side-menu.html")
+    // $("#admin-main-content").load("/admin-parts/admin-main-content.html")
+    // $(`#${activeMenu}`).addClass("active")
+    // $(document).on('click', '.admin-side-menu-element', function (){
+    //     $('.admin-side-menu-element').removeClass('active');
+    //     $(this).addClass("active");
+    // });
+
+    function loadMainContent(htmlPageName) {
+        $("#admin-main-content").load(`/${htmlPageName}`)
+    }
+
+</script>
+</body>
+</html>
