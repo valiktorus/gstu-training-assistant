@@ -1,7 +1,7 @@
 package by.gstu.workout.service;
 
-import by.gstu.workout.model.Exercise;
 import by.gstu.workout.model.ExercisePart;
+import by.gstu.workout.repository.CustomNativeRepositoryImpl;
 import by.gstu.workout.repository.ExercisePartRepository;
 import by.gstu.workout.repository.ExerciseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,8 @@ import java.util.List;
 public class ExercisePartService {
     @Autowired
     private ExercisePartRepository exercisePartRepository;
+    @Autowired
+    private CustomNativeRepositoryImpl customNativeRepository;
 
     @Autowired
     private ExerciseRepository exerciseRepository;
@@ -24,12 +26,7 @@ public class ExercisePartService {
         return exercisePartRepository.findAll();
     }
 
-    public ExercisePart save(ExercisePart exercisePart) {
-        System.out.println("");
-        exerciseRepository.savePart();
-        exercisePartRepository.savePart(exercisePart.getExercise().getId(), exercisePart.getOrder(),
-                exercisePart.getImage().getId(),exercisePart.getDescription());
-        ExercisePart save = exercisePartRepository.save(exercisePart);
-        return save;
+    public void save(ExercisePart exercisePart) {
+        customNativeRepository.insertExercisePart(exercisePart);
     }
 }
