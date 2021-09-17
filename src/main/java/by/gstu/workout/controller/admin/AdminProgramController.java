@@ -42,14 +42,14 @@ public class AdminProgramController {
     private CustomNativeRepositoryImpl customNativeRepository;
 
     @GetMapping("/admin/program/list")
-    public String listMusclePage(Model model) {
+    public String listProgramPage(Model model) {
         model.addAttribute("activeMenu", "side-menu-del-program");
         model.addAttribute("programs", programService.getAll());
         return "admin/program/list-programs";
     }
 
     @GetMapping("/admin/program/edit/{id}")
-    public String editMusclePage(@PathVariable Long id, Model model) {
+    public String editProgramPage(@PathVariable Long id, Model model) {
         model.addAttribute("activeMenu", "side-menu-del-program");
         model.addAttribute("program", programService.get(id));
         model.addAttribute("difficulties", difficultyService.getAll());
@@ -59,7 +59,7 @@ public class AdminProgramController {
 
     @SneakyThrows
     @PostMapping("/admin/program/edit/{id}")
-    public String editMuscle(@PathVariable Long id,
+    public String editProgram(@PathVariable Long id,
                                  @RequestParam("difficulty") Long difficultyId,
                                  @RequestParam("rest-time") Integer restTimeSeconds,
                                  @RequestParam String description,
@@ -84,7 +84,7 @@ public class AdminProgramController {
 
     @SneakyThrows
     @PostMapping("/admin/programsegment/edit/{id}")
-    public String editExercisePart(@PathVariable Long id,
+    public String editProgramPart(@PathVariable Long id,
                              @RequestParam Integer order,
                              @RequestParam("exercise") Long exerciseId,
                              @RequestParam("segment-type") String segmentType,
@@ -111,7 +111,7 @@ public class AdminProgramController {
 
 
     @PostMapping("/admin/program/delete/{id}")
-    public String deleteExercise(@PathVariable Long id, Model model) {
+    public String deleteProgram(@PathVariable Long id, Model model) {
         programService.delete(id);
         model.addAttribute("activeMenu", "side-menu-del-program");
         model.addAttribute("programs", programService.getAll());
@@ -119,7 +119,7 @@ public class AdminProgramController {
     }
 
     @PostMapping("/admin/programsegment/delete/{id}")
-    public String deleteExercisePart(@PathVariable Long id, Model model) {
+    public String deleteProgramPart(@PathVariable Long id, Model model) {
         ProgramSegment programSegment = programSegmentService.get(id);
         programSegmentService.delete(programSegment);
         model.addAttribute("activeMenu", "side-menu-del-program");
@@ -130,7 +130,7 @@ public class AdminProgramController {
     }
 
     @GetMapping("/admin/program/add")
-    public String addMusclePage(Model model) {
+    public String addProgramPage(Model model) {
         model.addAttribute("activeMenu", "side-menu-add-program");
         model.addAttribute("difficulties", difficultyService.getAll());
         return "admin/program/add-program";
@@ -138,7 +138,7 @@ public class AdminProgramController {
 
     @SneakyThrows
     @PostMapping("/admin/program/add")
-    public String addMuscle(@RequestParam String name,
+    public String addProgram(@RequestParam String name,
                             @RequestParam("newImage") MultipartFile imageFile,
                             @RequestParam String description,
                             @RequestParam("difficulty") Long difficultyId,
@@ -162,7 +162,7 @@ public class AdminProgramController {
 
     @SneakyThrows
     @PostMapping("/admin/programsegment/add/{id}")
-    public String addMuscle(@PathVariable("id") Long programId,
+    public String addProgram(@PathVariable("id") Long programId,
                             @RequestParam Integer order,
                             @RequestParam("exercise") Integer exerciseId,
                             @RequestParam("segment-type") String segmentType,

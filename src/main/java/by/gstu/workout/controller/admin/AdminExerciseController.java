@@ -3,7 +3,6 @@ package by.gstu.workout.controller.admin;
 import by.gstu.workout.model.Exercise;
 import by.gstu.workout.model.ExercisePart;
 import by.gstu.workout.model.Image;
-import by.gstu.workout.model.MuscleGroup;
 import by.gstu.workout.service.EquipmentService;
 import by.gstu.workout.service.ExercisePartService;
 import by.gstu.workout.service.ExerciseService;
@@ -33,7 +32,7 @@ public class AdminExerciseController {
     private ExercisePartService exercisePartService;
 
     @GetMapping("/admin/exercise/list")
-    public String listMusclePage(Model model){
+    public String listExercisePage(Model model){
         model.addAttribute("activeMenu", "side-menu-del-exercise");
         model.addAttribute("exercises", exerciseService.getAll());
         model.addAttribute("muscles", muscleGroupService.getAll());
@@ -42,7 +41,7 @@ public class AdminExerciseController {
     }
 
     @GetMapping("/admin/exercise/edit/{id}")
-    public String editMusclePage(@PathVariable Long id, Model model) {
+    public String editExercisePage(@PathVariable Long id, Model model) {
         model.addAttribute("activeMenu", "side-menu-del-exercise");
         model.addAttribute("exercise", exerciseService.get(id));
         model.addAttribute("muscles", muscleGroupService.getAll());
@@ -52,7 +51,7 @@ public class AdminExerciseController {
 
     @SneakyThrows
     @PostMapping("/admin/exercise/edit/{id}")
-    public String editMuscle(@PathVariable Long id,
+    public String editExercise(@PathVariable Long id,
                                  @RequestParam("muscle") Long muscleGroupId,
                                  @RequestParam("equipment") Long equipmentId,
                                  @RequestParam String description,
@@ -83,8 +82,6 @@ public class AdminExerciseController {
                              @RequestParam Integer order,
                              Model model) {
         ExercisePart exercisePart = exercisePartService.get(id);
-
-
         if (!image.isEmpty()) {
             exercisePart.getImage().setImage(image.getBytes());
         }
@@ -115,14 +112,14 @@ public class AdminExerciseController {
         ExercisePart exercisePart = exercisePartService.get(id);
         exercisePartService.delete(exercisePart);
         model.addAttribute("activeMenu", "side-menu-del-exercise");
-        model.addAttribute("exercises", exerciseService.getAll());
+        model.addAttribute("exercise", exercisePart.getExercise());
         model.addAttribute("muscles", muscleGroupService.getAll());
         model.addAttribute("equipments", equipmentService.getAll());
-        return "admin/exercise/list-exercises";
+        return "admin/exercise/edit-exercise";
     }
 
     @GetMapping("/admin/exercise/add")
-    public String addMusclePage(Model model) {
+    public String addExercisePage(Model model) {
         model.addAttribute("activeMenu", "side-menu-add-exercise");
         model.addAttribute("muscles", muscleGroupService.getAll());
         model.addAttribute("equipments", equipmentService.getAll());
@@ -130,7 +127,7 @@ public class AdminExerciseController {
     }
 
     @PostMapping("/admin/exercise/add")
-    public String addMuscle(@RequestParam String name,
+    public String addExercise(@RequestParam String name,
                             @RequestParam("newImage") MultipartFile image,
                             @RequestParam("muscle") Long muscleGroupId,
                             @RequestParam("equipment") Long equipmentId,
@@ -147,7 +144,7 @@ public class AdminExerciseController {
 
     @SneakyThrows
     @PostMapping("/admin/exercisepart/add/{id}")
-    public String addMuscle(@PathVariable("id") Long exerciseId,
+    public String addExercisePart(@PathVariable("id") Long exerciseId,
                                 @RequestParam("newImage") MultipartFile imageFile,
                             @RequestParam Integer order,
                             @RequestParam String description,
@@ -163,7 +160,7 @@ public class AdminExerciseController {
         }
         exercisePart.setOrder(order);
         exercisePart.setDescription(description);
-        exercisePartService.save(exercisePart);
+        exercisePartService.insert(exercisePart);
         model.addAttribute("activeMenu", "side-menu-del-exercise");
         model.addAttribute("exercise", exerciseService.get(exerciseId));
         model.addAttribute("muscles", muscleGroupService.getAll());

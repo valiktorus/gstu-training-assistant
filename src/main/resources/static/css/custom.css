@@ -1,0 +1,40 @@
+body{
+    background-image: url("/images/pexels-lukas-669577.jpg");
+    color: #000000;
+}
+div .bg-primary {
+    opacity: 83%;
+    background-color: #bbc5ce !important;
+    margin: 2px;
+}
+.btn-primary {
+    background-color: #aabac6;
+    border-color: #236661;
+}
+.page-item.active .page-link {
+    background-color: #aabac6;
+    border-color: #236661;
+}
+.page-link {
+    color: black;
+}
+.bg-dark {
+    background-color: #282f42 !important;
+}
+h1{
+    color: black;
+}
+h4, h2{
+    color: black;
+}
+.lead {
+    color: black;
+}
+.card h5, .card h4{
+    color: black;
+}
+
+.img-fluid {
+    opacity: 90%;
+    border-radius: 50px;
+}

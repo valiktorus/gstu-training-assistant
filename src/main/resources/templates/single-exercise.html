@@ -10,6 +10,12 @@
   <!--  <link rel="stylesheet" href="../static/css/workout.css">-->
   <link rel="stylesheet" href="/css/aquamarine.css">
   <link rel="stylesheet" href="/css/workout.css">
+  <link rel="stylesheet" href="/css/custom.css">
+  <style>
+      body {
+          background-image: url("/images/pexels-lukas-669576-cut.jpg");
+      }
+  </style>
 </head>
 
 <body class="m-0 p-0" style="">
@@ -29,6 +35,8 @@
       </ul>
       <a href="/"><p class="d-none d-md-block lead mb-0  text-white">Подбор Тренировок</p></a>
       <ul class="navbar-nav ml-auto">
+
+        <p style="float: right" class="d-none d-md-block lead mb-0  text-white" th:text="${userName}">Подбор Тренировок</p>
 <!--        <li class="nav-item mx-1"><a class="nav-link" href="#">-->
 <!--          <i class="fa fa-github fa-fw fa-lg"></i>-->
 <!--        </a></li>-->

@@ -26,8 +26,11 @@ public class ExercisePartService {
         return exercisePartRepository.findAll();
     }
 
-    public void save(ExercisePart exercisePart) {
+    public void insert(ExercisePart exercisePart) {
         customNativeRepository.insertExercisePart(exercisePart);
+    }
+    public void save(ExercisePart exercisePart) {
+        exercisePartRepository.save(exercisePart);
     }
     public void delete(ExercisePart exercisePart){
         exercisePartRepository.delete(exercisePart);
