@@ -10,11 +10,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * Admin difficulty controller.
+ */
 @Controller
 public class AdminDifficultyController {
     @Autowired
     private DifficultyService difficultyService;
 
+    /**
+     * get delete or update difficulty page.
+     *
+     * @param model the model
+     * @return update difficulty page
+     */
     @GetMapping("/admin/difficulty/list")
     public String deleteUpdateDifficultyPage(Model model){
         model.addAttribute("activeMenu", "side-menu-del-dif");
@@ -22,6 +31,13 @@ public class AdminDifficultyController {
         return "admin/difficulties/list-difficulties";
     }
 
+    /**
+     * forward to edit difficulty page.
+     *
+     * @param id the id
+     * @param model the model
+     * @return edit difficulty page
+     */
     @GetMapping("/admin/difficulty/edit/{id}")
     public String editDifficultyPage(@PathVariable Long id, Model model) {
         model.addAttribute("activeMenu", "side-menu-del-dif");
@@ -29,6 +45,14 @@ public class AdminDifficultyController {
         return "admin/difficulties/edit-difficulty";
     }
 
+    /**
+     * Edit difficulty.
+     *
+     * @param id the id
+     * @param name the name
+     * @param model the model
+     * @return list difficulty page
+     */
     @PostMapping("/admin/difficulty/edit/{id}")
     public String editDifficulty(@PathVariable Long id,
                                  @RequestParam String name,
@@ -42,6 +66,13 @@ public class AdminDifficultyController {
     }
 
 
+    /**
+     * Delete difficulty.
+     *
+     * @param id the id
+     * @param model the model
+     * @return list difficulty page
+     */
     @PostMapping("/admin/difficulty/delete/{id}")
     public String deleteDifficulty(@PathVariable Long id, Model model) {
         Difficulty difficulty = difficultyService.get(id);
@@ -51,6 +82,12 @@ public class AdminDifficultyController {
         return "admin/difficulties/list-difficulties";
     }
 
+    /**
+     * forward to add difficulty page.
+     *
+     * @param model the model
+     * @return add difficulty page
+     */
     @GetMapping("/admin/difficulty/add")
     public String addDifficultyPage(Model model) {
         model.addAttribute("activeMenu", "side-menu-add-dif");
@@ -58,6 +95,13 @@ public class AdminDifficultyController {
         return "admin/difficulties/add-difficulty";
     }
 
+    /**
+     * Add difficulty.
+     *
+     * @param name the name
+     * @param model the model
+     * @return list difficulty page
+     */
     @PostMapping("/admin/difficulty/add")
     public String addDifficulty(@RequestParam String name, Model model) {
         Difficulty difficulty = new Difficulty();

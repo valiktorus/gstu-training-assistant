@@ -11,10 +11,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Image controller.
+ */
 @Controller
 public class ImageController {
     @Autowired
     private ImageService imageService;
+
+    /**
+     * Get image. write to outputStream image
+     *
+     * @param imageId the image id
+     * @param response the response
+     * @param model the model
+     * @throws IOException the io exception
+     */
     @GetMapping("/image/{imageId}")
     @ResponseBody
     public void getImage(@PathVariable(name = "imageId") Long imageId, HttpServletResponse response, Model model)

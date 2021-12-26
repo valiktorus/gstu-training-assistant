@@ -16,6 +16,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * Main controller.
+ */
 @Controller
 public class MainController {
     @Autowired
@@ -32,6 +35,18 @@ public class MainController {
     private ProgramService programService;
 
 
+    /**
+     * Get exercises page.
+     *
+     * @param page the page
+     * @param pageSize the page size
+     * @param muscleGroup the muscle group
+     * @param equipment the equipment
+     * @param sortedBy the sorted by
+     * @param token the token
+     * @param model the model
+     * @return the exercises page
+     */
     @GetMapping(value = {"/", "/home", "/exercises"} )
     public String getExercises(@RequestParam(defaultValue = "1") Integer page,
                                @RequestParam(defaultValue = "6") Integer pageSize,
@@ -57,6 +72,17 @@ public class MainController {
         return "exercises";
     }
 
+    /**
+     * Gets programs page.
+     *
+     * @param page the page
+     * @param pageSize the page size
+     * @param difficulty the difficulty
+     * @param sortedBy the sorted by
+     * @param token the token
+     * @param model the model
+     * @return the programs page
+     */
     @GetMapping(value = {"/programs"})
     public String getPrograms(@RequestParam(defaultValue = "1") Integer page,
                               @RequestParam(defaultValue = "6") Integer pageSize,

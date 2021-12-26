@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Program service.
+ */
 @Service
 public class ProgramService {
     @Autowired
@@ -24,14 +27,35 @@ public class ProgramService {
     @Autowired
     private ImageService imageService;
 
+    /**
+     * Get program.
+     *
+     * @param id the id
+     * @return the program
+     */
     public Program get(Long id) {
         return programRepository.findById(id).orElseThrow(() -> new RuntimeException("No such Program"));
     }
 
+    /**
+     * Get all programs.
+     *
+     * @return the list
+     */
     public List<Program> getAll(){
         return programRepository.findAll();
     }
 
+    /**
+     * Gets all programs by difficulty.
+     *
+     * @param difficulty the difficulty
+     * @param pageNumber the page number
+     * @param pageSize the page size
+     * @param sortedField the sorted field
+     * @param direction the direction
+     * @return the all programs by difficulty
+     */
     public Page<Program> getAllByDifficulty(String difficulty, int pageNumber,
                                             int pageSize, String sortedField, Sort.Direction direction) {
         String currentDifficulty = Constants.DEFAULT_FILTRATION_VALUE.equals(difficulty) ? null : difficulty;
@@ -44,9 +68,21 @@ public class ProgramService {
         return programRepository.findAllByDifficultyName(DifficultyName.valueOf(difficulty), pageRequest);
     }
 
+    /**
+     * Save program.
+     *
+     * @param program the program
+     * @return the program
+     */
     public Program save(Program program) {
         return programRepository.save(program);
     }
+
+    /**
+     * Delete program.
+     *
+     * @param programId the program id
+     */
     public void delete(Long programId) {
         programRepository.delete(get(programId));
     }

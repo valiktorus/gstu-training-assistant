@@ -13,10 +13,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Comparator;
 
+/**
+ * Program controller.
+ */
 @Controller
 public class ProgramController {
     @Autowired
     private ProgramService programService;
+
+    /**
+     * Get single program page.
+     *
+     * @param id the id
+     * @param model the model
+     * @param token the token
+     * @return program page
+     */
     @GetMapping("/program/{id}")
     public String getSingleProgramPage(@PathVariable Long id, Model model, OAuth2AuthenticationToken token){
         Program program = programService.get(id);

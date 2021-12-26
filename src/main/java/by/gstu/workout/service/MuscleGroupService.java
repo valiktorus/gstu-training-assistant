@@ -11,6 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
+/**
+ * Muscle group service.
+ */
 @Service
 public class MuscleGroupService {
 
@@ -19,14 +22,32 @@ public class MuscleGroupService {
     @Autowired
     private ImageService imageService;
 
+    /**
+     * Gets all muscles.
+     *
+     * @return all muscles
+     */
     public List<MuscleGroup> getAll() {
         return muscleGroupRepository.findAll();
     }
 
+    /**
+     * Get muscle group.
+     *
+     * @param id the id
+     * @return the muscle group
+     */
     public MuscleGroup get(Long id) {
         return muscleGroupRepository.getOne(id);
     }
 
+    /**
+     * Save muscle group.
+     *
+     * @param name the name
+     * @param imageFile the image file
+     * @return the muscle group
+     */
     @SneakyThrows
     public MuscleGroup save(String name, MultipartFile imageFile) {
         Image image = new Image();
@@ -38,10 +59,21 @@ public class MuscleGroupService {
         return muscleGroupRepository.save(muscleGroup);
     }
 
+    /**
+     * Save muscle group.
+     *
+     * @param muscleGroup the muscle group
+     * @return the muscle group
+     */
     public MuscleGroup save(MuscleGroup muscleGroup) {
         return muscleGroupRepository.save(muscleGroup);
     }
 
+    /**
+     * Delete muscle group.
+     *
+     * @param muscleGroup the muscle group
+     */
     public void delete(MuscleGroup muscleGroup){
         muscleGroupRepository.delete(muscleGroup);
     }

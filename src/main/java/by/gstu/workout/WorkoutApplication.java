@@ -20,9 +20,6 @@ public class WorkoutApplication extends SpringBootServletInitializer{
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests()
-                    // allow antonymous access to the root page
-//                    .antMatchers("/").permitAll()
-                    // all other requests
                     .anyRequest().authenticated()
 
                     // set logout URL

@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * Admin program controller.
+ */
 @Controller
 public class AdminProgramController {
     @Autowired
@@ -41,6 +44,12 @@ public class AdminProgramController {
     @Autowired
     private CustomNativeRepositoryImpl customNativeRepository;
 
+    /**
+     * forward to List program page string.
+     *
+     * @param model the model
+     * @return program list page
+     */
     @GetMapping("/admin/program/list")
     public String listProgramPage(Model model) {
         model.addAttribute("activeMenu", "side-menu-del-program");
@@ -48,6 +57,13 @@ public class AdminProgramController {
         return "admin/program/list-programs";
     }
 
+    /**
+     * Edit program page string.
+     *
+     * @param id the id
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("/admin/program/edit/{id}")
     public String editProgramPage(@PathVariable Long id, Model model) {
         model.addAttribute("activeMenu", "side-menu-del-program");
@@ -57,6 +73,18 @@ public class AdminProgramController {
         return "admin/program/edit-program";
     }
 
+    /**
+     * Edit program.
+     *
+     * @param id the id
+     * @param difficultyId the difficulty id
+     * @param restTimeSeconds the rest time seconds
+     * @param description the description
+     * @param image the image
+     * @param name the name
+     * @param model the model
+     * @return edit program page
+     */
     @SneakyThrows
     @PostMapping("/admin/program/edit/{id}")
     public String editProgram(@PathVariable Long id,
@@ -82,6 +110,20 @@ public class AdminProgramController {
         return "admin/program/edit-program";
     }
 
+    /**
+     * Edit program part.
+     *
+     * @param id the id
+     * @param order the order
+     * @param exerciseId the exercise id
+     * @param segmentType the segment type
+     * @param setsNumber the sets number
+     * @param setRestTime the set rest time
+     * @param repetitions the repetitions
+     * @param elementRestTime the element rest time
+     * @param model the model
+     * @return edit program page
+     */
     @SneakyThrows
     @PostMapping("/admin/programsegment/edit/{id}")
     public String editProgramPart(@PathVariable Long id,
@@ -110,6 +152,13 @@ public class AdminProgramController {
     }
 
 
+    /**
+     * Delete program.
+     *
+     * @param id the id
+     * @param model the model
+     * @return program list page
+     */
     @PostMapping("/admin/program/delete/{id}")
     public String deleteProgram(@PathVariable Long id, Model model) {
         programService.delete(id);
@@ -118,6 +167,13 @@ public class AdminProgramController {
         return "admin/program/list-programs";
     }
 
+    /**
+     * Delete program part.
+     *
+     * @param id the id
+     * @param model the model
+     * @return edit program page
+     */
     @PostMapping("/admin/programsegment/delete/{id}")
     public String deleteProgramPart(@PathVariable Long id, Model model) {
         ProgramSegment programSegment = programSegmentService.get(id);
@@ -129,6 +185,12 @@ public class AdminProgramController {
         return "admin/program/edit-program";
     }
 
+    /**
+     * Add program page.
+     *
+     * @param model the model
+     * @return add program page
+     */
     @GetMapping("/admin/program/add")
     public String addProgramPage(Model model) {
         model.addAttribute("activeMenu", "side-menu-add-program");
@@ -136,6 +198,17 @@ public class AdminProgramController {
         return "admin/program/add-program";
     }
 
+    /**
+     * Add program.
+     *
+     * @param name the name
+     * @param imageFile the image file
+     * @param description the description
+     * @param difficultyId the difficulty id
+     * @param restTime the rest time
+     * @param model the model
+     * @return edit program page
+     */
     @SneakyThrows
     @PostMapping("/admin/program/add")
     public String addProgram(@RequestParam String name,
@@ -160,6 +233,20 @@ public class AdminProgramController {
         return "admin/program/edit-program";
     }
 
+    /**
+     * Add program segment.
+     *
+     * @param programId the program id
+     * @param order the order
+     * @param exerciseId the exercise id
+     * @param segmentType the segment type
+     * @param setsNumber the sets number
+     * @param setRestTime the set rest time
+     * @param repetitions the repetitions
+     * @param elementRestTime the element rest time
+     * @param model the model
+     * @return edit program page
+     */
     @SneakyThrows
     @PostMapping("/admin/programsegment/add/{id}")
     public String addProgram(@PathVariable("id") Long programId,

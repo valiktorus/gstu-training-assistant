@@ -10,12 +10,20 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+/**
+ * Custom native repository which uses sql.
+ */
 @Repository
 public class CustomNativeRepositoryImpl{
 
     @Autowired
     private EntityManager entityManager;
 
+    /**
+     * Insert exercise part using sql.
+     *
+     * @param exercisePart the exercise part
+     */
     @SneakyThrows
     @Transactional
     public void insertExercisePart(ExercisePart exercisePart){
@@ -28,6 +36,11 @@ public class CustomNativeRepositoryImpl{
         nativeQuery.executeUpdate();
     }
 
+    /**
+     * Insert program segment using sql.
+     *
+     * @param programSegment the program segment
+     */
     @SneakyThrows
     @Transactional
     public void insertProgramSegment(ProgramSegment programSegment){

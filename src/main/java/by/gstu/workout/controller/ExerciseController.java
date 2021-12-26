@@ -9,10 +9,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+/**
+ * Exercise controller.
+ */
 @Controller
 public class ExerciseController {
     @Autowired
     private ExerciseService exerciseService;
+
+    /**
+     * Get single exercise page.
+     *
+     * @param id the id
+     * @param model the model
+     * @param token the token
+     * @return single exercise page
+     */
     @GetMapping("/exercise/{id}")
  public String getSingleExercisePage(@PathVariable Long id, Model model, OAuth2AuthenticationToken token){
      model.addAttribute("exercise", exerciseService.get(id));

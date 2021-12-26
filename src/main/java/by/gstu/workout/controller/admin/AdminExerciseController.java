@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * Admin exercise controller.
+ */
 @Controller
 public class AdminExerciseController {
     @Autowired
@@ -31,6 +34,12 @@ public class AdminExerciseController {
     @Autowired
     private ExercisePartService exercisePartService;
 
+    /**
+     * forward to list exercise page.
+     *
+     * @param model the model
+     * @return List exercise page
+     */
     @GetMapping("/admin/exercise/list")
     public String listExercisePage(Model model){
         model.addAttribute("activeMenu", "side-menu-del-exercise");
@@ -40,6 +49,13 @@ public class AdminExerciseController {
         return "admin/exercise/list-exercises";
     }
 
+    /**
+     * Edit exercise page string.
+     *
+     * @param id the id
+     * @param model the model
+     * @return edit exercise page
+     */
     @GetMapping("/admin/exercise/edit/{id}")
     public String editExercisePage(@PathVariable Long id, Model model) {
         model.addAttribute("activeMenu", "side-menu-del-exercise");
@@ -49,6 +65,18 @@ public class AdminExerciseController {
         return "admin/exercise/edit-exercise";
     }
 
+    /**
+     * Edit exercise.
+     *
+     * @param id the id
+     * @param muscleGroupId the muscle group id
+     * @param equipmentId the equipment id
+     * @param description the description
+     * @param image the image
+     * @param name the name
+     * @param model the model
+     * @return edit exercise page
+     */
     @SneakyThrows
     @PostMapping("/admin/exercise/edit/{id}")
     public String editExercise(@PathVariable Long id,
@@ -74,6 +102,16 @@ public class AdminExerciseController {
         return "admin/exercise/edit-exercise";
     }
 
+    /**
+     * Edit exercise part.
+     *
+     * @param id the id
+     * @param description the description
+     * @param image the image
+     * @param order the order
+     * @param model the model
+     * @return edit exercise page
+     */
     @SneakyThrows
     @PostMapping("/admin/exercisepart/edit/{id}")
     public String editExercisePart(@PathVariable Long id,
@@ -96,6 +134,13 @@ public class AdminExerciseController {
     }
 
 
+    /**
+     * Delete exercise.
+     *
+     * @param id the id
+     * @param model the model
+     * @return List exercise page
+     */
     @PostMapping("/admin/exercise/delete/{id}")
     public String deleteExercise(@PathVariable Long id, Model model) {
         Exercise exercise = exerciseService.get(id);
@@ -107,6 +152,13 @@ public class AdminExerciseController {
         return "admin/exercise/list-exercises";
     }
 
+    /**
+     * Delete exercise part.
+     *
+     * @param id the id
+     * @param model the model
+     * @return edit exercise page
+     */
     @PostMapping("/admin/exercisepart/delete/{id}")
     public String deleteExercisePart(@PathVariable Long id, Model model) {
         ExercisePart exercisePart = exercisePartService.get(id);
@@ -118,6 +170,12 @@ public class AdminExerciseController {
         return "admin/exercise/edit-exercise";
     }
 
+    /**
+     * forward to Add exercise page.
+     *
+     * @param model the model
+     * @return add exercise page
+     */
     @GetMapping("/admin/exercise/add")
     public String addExercisePage(Model model) {
         model.addAttribute("activeMenu", "side-menu-add-exercise");
@@ -126,6 +184,17 @@ public class AdminExerciseController {
         return "admin/exercise/add-exercise";
     }
 
+    /**
+     * Add exercise.
+     *
+     * @param name the name
+     * @param image the image
+     * @param muscleGroupId the muscle group id
+     * @param equipmentId the equipment id
+     * @param description the description
+     * @param model the model
+     * @return edit exercise page
+     */
     @PostMapping("/admin/exercise/add")
     public String addExercise(@RequestParam String name,
                             @RequestParam("newImage") MultipartFile image,
@@ -142,6 +211,16 @@ public class AdminExerciseController {
         return "admin/exercise/edit-exercise";
     }
 
+    /**
+     * Add exercise part.
+     *
+     * @param exerciseId the exercise id
+     * @param imageFile the image file
+     * @param order the order
+     * @param description the description
+     * @param model the model
+     * @return edit exercise page
+     */
     @SneakyThrows
     @PostMapping("/admin/exercisepart/add/{id}")
     public String addExercisePart(@PathVariable("id") Long exerciseId,
